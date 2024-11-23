@@ -5,12 +5,13 @@
         
             <div class="flex border-b border-gray-300 py-2 justify-between">
                     <div>
-                        <h1 class="text-2xl font-semibold font-serif text-gray-800">Courses</h1>
+                        <h1 class="text-2xl font-semibold font-serif text-gray-800">Venue Types</h1>
                     </div>
                     <div>
-                            <a href="{{ route('admin.courses.create') }}" class="bg-green-600 text-white py-2 px-4 
-                                            rounded-lg text-xs md:text-sm hover:bg-green-500"><i class="fas fa-plus text-xs"></i> New Course</a>
+                            <a href="{{ route('admin.venue_types.create') }}" class="bg-green-600 text-white py-2 px-4 
+                                            rounded-lg text-xs md:text-sm hover:bg-green-500"><i class="fas fa-plus text-xs"></i> New Venue Type</a>
 
+                            
                     </div>
             </div>
         </section>
@@ -18,7 +19,7 @@
 
 
 
-        @if (count($courses) > 0)
+        @if (count($venue_types) > 0)
                 <section class="flex flex-col py-2 px-2 justify-end w-[95%] mx-auto md:px-4">
                     <div class="flex justify-end border-0">
                     
@@ -42,43 +43,40 @@
                         <thead>
                             <tr class="bg-gray-200">
                                 <th width='10%' class="text-center font-semibold py-2">SN</th>
-                                <th width='50%' class="font-semibold py-2 text-left">Name</th>                                
-                                <th width='10%' class="font-semibold py-2 text-left">Code</th>
+                                <th width='50%' class="font-semibold py-2 text-left">Name</th>                      
                                 <th width='30%' class="font-semibold py-2 text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php
-                                $counter = ($courses->currentPage() -1 ) * $courses->perPage();
+                                $counter = ($venue_types->currentPage() -1 ) * $venue_types->perPage();
                             @endphp
 
-                                @foreach ($courses as $course)
+                                @foreach ($venue_types as $venue_type)
                                 <tr class="border border-b border-gray-200">
                                     <td class='text-center py-4'>{{ ++$counter }}.</td>
                                     <td>
-                                            <a class="hover:underline" href="{{ route('admin.courses.show', ['course'=>$course->id]) }}">
-                                                {{ $course->title }}                                             
-                                            </a>
+                                        <a class="hover:underline" href="">
+                                            {{ $venue_type->name }} 
+                                        </a>
 
                                         <div>
                                             <small>
-                                                 {{ $course->department->code}}, {{ $course->department->college->code}}
+                                               
                                             </small>
                                         </div>
                                         
                                     </td>
                                     
-                                    <td>
-                                        {{ $course->code }}
-                                    </td>
+                                    
                                     <td class="text-center">
                                         <span class="text-sm">
                                             <a class="hover:bg-blue-500 bg-blue-400 text-white rounded-md 
-                                                    px-4 py-1 text-xs" href="{{ route('admin.courses.edit', ['course'=>$course->id])}}">Edit</a>
+                                                    px-4 py-1 text-xs" href="{{ route('admin.venue_types.edit', ['venue_type'=>$venue_type->id])}}">Edit</a>
                                         </span>
                                         <span> 
                                             <a class="hover:bg-red-500 bg-red-400 text-white rounded-md 
-                                                    px-4 py-1 text-xs" href="{{ route('admin.courses.confirm_delete', ['course'=>$course->id]) }}"
+                                                    px-4 py-1 text-xs" href="{{ route('admin.venue_types.confirm_delete', ['venue_type'=>$venue_type->id]) }}"
                                             >Delete</a>
                                         </span>
                                     </td>
@@ -92,7 +90,7 @@
                     </table>
 
                     <div class="mt-1">
-                        {{ $courses->links() }}
+                        {{ $venue_types->links() }}
 
                     </div>
 
@@ -101,7 +99,7 @@
         @else
                 <section class="flex flex-col w-[95%] md:w-[95%] border-0 mx-auto px-4 py-6">
                         <div class="flex flex-row justify-center items-center text-2xl font-bold text-gray-300">
-                            There is currently no Course
+                            There is currently no Venue Types
                         </div>
                 </section>
         @endif

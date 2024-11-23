@@ -5,11 +5,11 @@
             
             <div class="flex border-b border-gray-300 py-2 justify-between">
                     <div >
-                        <h1 class="text-2xl font-semibold font-serif text-gray-800">Edit Course</h1>
+                        <h1 class="text-2xl font-semibold font-serif text-gray-800">Remuneration Rate</h1>
                     </div>  
                     <div>
-                            <a href="{{ route('admin.courses.index') }}" class="bg-green-600 text-white py-2 px-4 
-                                            rounded-lg text-xs md:text-sm hover:bg-green-500"> Courses</a>
+                            <a href="{{ route('admin.remuneration_rates.index') }}" class="bg-green-600 text-white py-2 px-4 
+                                            rounded-lg text-xs md:text-sm hover:bg-green-500"> Remuneration Rates</a>
 
                            
                     </div>              
@@ -20,116 +20,110 @@
 
 
 
-        <!-- new college form //-->
+        <!-- new remuneration rtaes form //-->
         <section>
                 <div>
-                    <form  action="{{ route('admin.courses.update',['course'=>$course->id]) }} " method="POST" class="flex flex-col mx-auto w-[90%] items-center justify-center">
+                    <form  action="{{ route('admin.remuneration_rates.store')}} " method="POST" class="flex flex-col mx-auto w-[90%] items-center justify-center">
                         @csrf
 
                         
 
                         <div class="flex flex-col w-[80%] md:w-[60%] py-2 md:py-4" style="font-family:'Lato'; font-size:18px; font-weight:400;">
-                            <h2 class="font-semibold text-xl py-1" >Edit Course</h2>
-                            Provide Course title and code
+                            <h2 class="font-semibold text-xl py-1" >New Remuneration</h2>
+                            Provide Name, Amount and Point
                         </div>
 
 
                         @include('partials._session_response')
-
-
-                        <!-- Department //-->
-                        <div class="flex flex-col border-red-900 w-[80%] md:w-[60%] py-2">
-                            
-                            
-                            <select name="department" id='department' class="border border-1 border-gray-400 bg-gray-50
-                                                                        w-full p-4 rounded-md 
-                                                                        focus:outline-none
-                                                                        focus:border-blue-500 
-                                                                        focus:ring
-                                                                        focus:ring-blue-100"                                                                                                                                                                                                                                                                                                                                                
-                                                                        
-                                                                        style="font-family:'Lato';font-size:16px;font-weight:500;"
-                                                                        required
-                                                                        >
-                                                                    <option value=''>-- Select Department --</option>
-                                                                
-                                                                    @foreach($departments as $department)
-                                                                        <option class='py-4' value="{{$department->id}}" @if($course->department_id==$department->id) selected @endif>
-                                                                                {{$department->name}} ({{$department->code}})
-                                                                        </option>
-                                                                    @endforeach                                                                    
-                                                                    
-                                                                                                                                            
-                                                                    </select>
-
-                                                                        @error('department')
-                                                                        <span class="text-red-700 text-sm">
-                                                                            {{$message}}
-                                                                        </span>
-                                                                        @enderror
-                            
-                        </div>
                         
-                        <!-- end of Department //-->
+
+                        
                         
                         
 
-                        <!-- Course title //-->
+                        <!-- Name //-->
                         <div class="flex flex-col border-red-900 w-[80%] md:w-[60%] py-3">
                         
                             
-                            <input type="text" name="title" class="border border-1 border-gray-400 bg-gray-50
+                            <input type="text" name="name" class="border border-1 border-gray-400 bg-gray-50
                                                                     w-full p-4 rounded-md 
                                                                     focus:outline-none
                                                                     focus:border-blue-500 
                                                                     focus:ring
-                                                                    focus:ring-blue-100" placeholder="Course title"
+                                                                    focus:ring-blue-100" placeholder="Name"
                                                                     
-                                                                    value="{{ $course->title }}"
+                                                                    value="{{ old('name') }}"
                                                                     
                                                                     style="font-family:'Lato';font-size:16px;font-weight:500;"                                                                     
                                                                     required
                                                                     />  
                                                                                                                                         
 
-                                                                    @error('title')
+                                                                    @error('name')
                                                                         <span class="text-red-700 text-sm">
                                                                             {{$message}}
                                                                         </span>
                                                                     @enderror
                             
-                        </div><!-- end of course title //-->
+                        </div><!-- end of name //-->
 
-                        <!-- Course code //-->
+                        <!-- Amount //-->
                         <div class="flex flex-col border-red-900 w-[80%] md:w-[60%] py-3">
                         
                             
-                            <input type="text" name="code" class="border border-1 border-gray-400 bg-gray-50
+                            <input type="text" name="amount" class="border border-1 border-gray-400 bg-gray-50
                                                                     w-full p-4 rounded-md 
                                                                     focus:outline-none
                                                                     focus:border-blue-500 
                                                                     focus:ring
-                                                                    focus:ring-blue-100" placeholder="Course code"
+                                                                    focus:ring-blue-100" placeholder="Amount"
                                                                     
-                                                                    value="{{ $course->code }}"
+                                                                    value="{{ old('amount') }}"
                                                                     
                                                                     style="font-family:'Lato';font-size:16px;font-weight:500;"                                                                     
                                                                     required
                                                                     />  
                                                                                                                                         
 
-                                                                    @error('code')
+                                                                    @error('amount')
                                                                         <span class="text-red-700 text-sm">
                                                                             {{$message}}
                                                                         </span>
                                                                     @enderror
                             
-                        </div><!-- end of course code //-->
+                        </div><!-- end of amount //-->
+
+
+                        <!-- Point //-->
+                        <div class="flex flex-col border-red-900 w-[80%] md:w-[60%] py-3">
+                        
+                            
+                            <input type="text" name="point" class="border border-1 border-gray-400 bg-gray-50
+                                                                    w-full p-4 rounded-md 
+                                                                    focus:outline-none
+                                                                    focus:border-blue-500 
+                                                                    focus:ring
+                                                                    focus:ring-blue-100" placeholder="Point"
+                                                                    
+                                                                    value="{{ old('point') }}"
+                                                                    
+                                                                    style="font-family:'Lato';font-size:16px;font-weight:500;"                                                                     
+                                                                    required
+                                                                    />  
+                                                                                                                                        
+
+                                                                    @error('point')
+                                                                        <span class="text-red-700 text-sm">
+                                                                            {{$message}}
+                                                                        </span>
+                                                                    @enderror
+                            
+                        </div><!-- end of point //-->
 
                         <div class="flex flex-col border-red-900 w-[80%] md:w-[60%] mt-4">
                             <button type="submit" class="border border-1 bg-gray-400 py-4 text-white 
                                            hover:bg-gray-500
-                                           rounded-md text-lg" style="font-family:'Lato';font-weight:500;">Update Course</button>
+                                           rounded-md text-lg" style="font-family:'Lato';font-weight:500;">Create Remuneration Rate</button>
                         </div>
                         
                     </form><!-- end of new course form //-->
@@ -140,3 +134,5 @@
 
     </div><!-- end of container //-->
 </x-admin-layout>
+
+

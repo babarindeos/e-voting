@@ -4,100 +4,93 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\RemunerationRate;
+use App\Models\VenueType;
 
-class Admin_RemunerationRateController extends Controller
+class Admin_VenueTypeController extends Controller
 {
     //
     public function index()
     {
-        $remuneration_rates = RemunerationRate::orderBy('id', 'desc')->paginate(10);
-        return view('admin.remuneration_rates.index', compact('remuneration_rates'));
+        $venue_types = VenueType::orderBy('id', 'desc')->paginate(20);
+        return view('admin.venue_types.index', compact('venue_types'));
     }
-
 
     public function create()
     {
-        
-        return view('admin.remuneration_rates.create');
+        return view('admin.venue_types.create');
     }
 
     public function store(Request $request)
     {
         $formFields = $request->validate([
-            'name' => 'required|string|unique:remuneration_rates,name',
-            'amount' => 'required|numeric',
-            'point' => 'required|numeric'
+            'name' => 'required|string|unique:venue_types,name'
         ]);
 
         try
         {
-            $create = RemunerationRate::create($formFields);
+            $create = VenueType::create($formFields);
 
             if ($create)
             {
                 $data = [
                     'error' => true,
                     'status' => 'success',
-                    'message' => 'The Remuneration rate has been successfully created'
+                    'message' => 'The Venue Type has been successfully created'
                 ];
             }
             else
-            {
+            {                
                 $data = [
                     'error' => true,
                     'status' => 'fail',
-                    'message' => 'An error occurred creating the Remuneration rate'
+                    'message' => 'An error occurred creating the Venue Type'
                 ];
             }
-
         }
         catch(\Exception $e)
         {
+           
             $data = [
                 'error' => true,
                 'status' => 'fail',
                 'message' => $e->getMessage()
-            ];
+            ]; 
         }
 
         return redirect()->back()->with($data);
     }
 
-    public function edit(RemunerationRate $rate)
+    public function edit(VenueType $venue_type)
     {
-        return view('admin.remuneration_rates.edit')->with(['remuneration_rate'=>$rate]);
+        return view('admin.venue_types.edit', compact('venue_type'));
     }
 
-    public function update(Request $request, RemunerationRate $rate)
+    public function update(Request $request, VenueType $venue_type)
     {
         $formFields = $request->validate([
-            'name' => 'required|string',
-            'amount' => 'required|numeric',
-            'point' => 'required|numeric'
+            'name' => 'required|string'
         ]);
 
         try
         {
-            $update = $rate->update($formFields);
+            $update = $venue_type->update($formFields);
 
             if ($update)
             {
                 $data = [
                     'error' => true,
                     'status' => 'success',
-                    'message' => 'The Remuneration rate has been successfully updated'
+                    'message' => 'The Venue Type has been successfully updated'
                 ];
             }
             else
-            {
+            {                
                 $data = [
                     'error' => true,
                     'status' => 'fail',
-                    'message' => 'An error occurred updating the Remuneration rate'
+                    'message' => 'An error occurred updating the Venue Type'
                 ];
             }
-
         }
         catch(\Exception $e)
         {
@@ -111,15 +104,13 @@ class Admin_RemunerationRateController extends Controller
         return redirect()->back()->with($data);
     }
 
-    public function confirm_delete(RemunerationRate $rate)
+    public function confirm_delete(VenueType $venue_type)
     {
-        return view('admin.remuneration_rates.confirm_delete')->with(['remuneration_rate'=>$rate]);
+        return view('admin.venue_types.confirm_delete', compact('venue_type'));
     }
 
-    public function destroy(RemunerationRate $rate)
+    public function delete(VenueType $venue_type)
     {
-        $rate->delete();
-
-        return redirect()->route('admin.remuneration_rates.index');
+        
     }
 }
