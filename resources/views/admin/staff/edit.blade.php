@@ -6,7 +6,11 @@
             <div class="flex border-b border-gray-300 py-2 justify-between">
                     <div >
                         <h1 class="text-2xl font-semibold font-serif text-gray-800">Edit Staff</h1>
-                    </div>                
+                    </div>   
+                    <div>
+                            <a href="{{ route('admin.staff.index') }}" class="border text-green-600 border-green-600 hover:text-white py-2 px-6 
+                                            rounded-lg text-sm hover:bg-green-500 hover:border-green-500">Staff</a>
+                    </div>             
             </div>
             
         </section>
@@ -52,7 +56,7 @@
                                                                      >
                                                                     <option value=''>-- Select Department --</option>
                                                                         @foreach($departments as $department)
-                                                                            <option class='py-4' @if($department->id == $staff->department_id) selected @endif value="{{$department->id}}">{{$department->department_name}} ({{$department->department_code}})</option>
+                                                                            <option class='py-4' @if($department->id == $staff->department_id) selected @endif value="{{$department->id}}">{{$department->name}} ({{$department->code}})</option>
                                                                         @endforeach                                                                    
                                                                     </select>
 
@@ -194,7 +198,7 @@
                                                                     value="{{ $staff->middlename }}"
                                                                     
                                                                     style="font-family:'Lato';font-size:16px;font-weight:500;"                                                                     
-                                                                    required
+                                                                    
                                                                     />  
                                                                                                                                         
 

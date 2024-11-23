@@ -40,6 +40,9 @@ use App\Http\Controllers\Admin\Admin_VenueCategoryController;
 use App\Http\Controllers\Admin\Admin_VenueCategoryGroupController;
 
 use App\Http\Controllers\Admin\Admin_VenueController;
+use App\Http\Controllers\Admin\Admin_AnnouncementController;
+
+use App\Http\Controllers\Admin\Admin_MeetingController;
 
 
 
@@ -334,6 +337,7 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
 
     // User Profile
     Route::get('/profile/user/{fileno}', [Admin_ProfileController::class, 'user_profile'])->name('admin.profile.user_profile');
+    Route::get('/profile/user/{email}/user_profile', [Admin_ProfileController::class, 'email_user_profile'])->name('admin.profile.email_user_profile');
 
     // Tracker
     Route::get('tracker', [Admin_TrackerController::class, 'index'])->name('admin.tracker.index');
@@ -435,7 +439,7 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
 
 
 
-    // Creare Venue
+    // Create Venue
     Route::get('venues', [Admin_VenueController::class, 'index'])->name('admin.venues.index');
     Route::get('venues/create', [Admin_VenueController::class, 'create'])->name('admin.venues.create');
     Route::post('venues/store', [Admin_VenueController::class, 'store'])->name('admin.venues.store');
@@ -443,6 +447,44 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
     Route::post('venues/{venue}/update', [Admin_VenueController::class, 'update'])->name('admin.venues.update');
     Route::get('venues/{venue}/confirm_delete', [Admin_VenueController::class, 'confirm_delete'])->name('admin.venues.confirm_delete');
     Route::delete('venues/{venue}/delete', [Admin_VenueController::class, 'destroy'])->name('admin.venues.delete');
+
+
+    // Create Announcement
+    Route::get('announcements', [Admin_AnnouncementController::class, 'index'])->name('admin.announcements.index');
+    Route::get('announcements/{announcement}/show', [Admin_AnnouncementController::class, 'show'])->name('admin.announcements.show');
+
+    Route::get('announcements/create', [Admin_AnnouncementController::class, 'create']
+    )->name('admin.announcements.create');
+
+    Route::post('announcements/store', [Admin_AnnouncementController::class, 'store']
+    )->name('admin.announcements.store');
+
+    Route::post('announcements/{announcement}/comments/store', [Admin_AnnouncementController::class, 'store_comment'])->name('admin.announcements.comments.store');
+    Route::delete('announcements/{comment}/comments/delete', [Admin_AnnouncementController::class, 'delete_comment'])->name('admin.announcements.comments.delete_comment');
+    
+    Route::get('announcements/{announcement}/notify', [Admin_AnnouncementController::class, 'notify'])->name('admin.announcements.notify');
+    Route::post('announcements/{announcement}/notify', [Admin_AnnouncementController::class, 'post_notify'])->name('admin.announcements.post_notify');
+
+    Route::get('announcements/{announcement}/edit', [Admin_AnnouncementController::class, 'edit'])->name('admin.announcements.edit');
+    Route::post('announcements/{announcement}/update', [Admin_AnnouncementController::class, 'update'])->name('admin.announcements.update');
+
+    Route::get('announcements/{announcement}/confirm_delete', [Admin_AnnouncementController::class, 'confirm_delete'])->name('admin.announcements.confirm_delete');
+    Route::delete('announcements/{announcement}/delete', [Admin_AnnouncementController::class, 'destroy'])->name('admin.announcements.delete');
+
+    Route::get('announcements/{announcement}/delete_file', [Admin_AnnouncementController::class, 'delete_file'])->name('admin.announcements.delete_file');
+
+
+    // Meeting
+    Route::get('meetings', [Admin_MeetingController::class, 'index'])->name('admin.meetings.index');
+    Route::get('meetings/create', [Admin_MeetingController::class, 'create'])->name('admin.meetings.create');
+    Route::post('meetings/store', [Admin_MeetingController::class, 'store'])->name('admin.meetings.store');
+    Route::get('meetings/{meeting}/show', [Admin_MeetingController::class, 'show'])->name('admin.meetings.show');
+    Route::get('meetings/{meeting}/edit', [Admin_MeetingController::class, 'edit'])->name('admin.meetings.edit');
+    Route::post('meetings/{meeting}/update', [Admin_MeetingController::class, 'update'])->name('admin.meetings.update');
+    Route::get('meetings/{meeting}/confirm_delete', [Admin_MeetingController::class, 'confirm_delete'])->name('admin.meetings.comfirm_delete');
+    Route::post('meetings/{meeting}/destroy', [Admin_MeetingController::class, 'show'])->name('admin.meetings.destroy');
+    
+
 });
 
 

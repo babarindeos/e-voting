@@ -9,10 +9,15 @@ class AnnouncementComment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['cell_id', 'user_id', 'message'];
+    protected $fillable = ['announcement_id', 'user_id', 'message'];
 
     public function sender()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function announcement()
+    {
+        return $this->belongsTo(Announcement::class, 'announcement_id', 'id');
     }
 }

@@ -42,10 +42,10 @@
                                 </button>
                                 <!-- Sub-menu -->
                                 <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[350%]">
-                                    <a href="{{ route('admin.cells.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Meetings</a>
-                                    <a href="{{ route('admin.cells.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create Meeting</a>
+                                    <a href="{{ route('admin.meetings.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Meetings</a>
+                                    <a href="{{ route('admin.meetings.create') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create Meeting</a>
                                     <a href="#" class="flex flex-row px-4 py-2 hover:bg-gray-200 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Meeting Notification</a>
-                                    <a href="{{ route('admin.staff.index') }}" class="flex flex-row px-4 py-2 hover:bg-green-500 hover:text-white  hover:border-l-yellow-500 hover:border-l-4 pr-8">Minutes of Meeting</a>
+                                    <a href="" class="flex flex-row px-4 py-2 hover:bg-green-500 hover:text-white  hover:border-l-yellow-500 hover:border-l-4 pr-8">Minutes of Meeting</a>
                                 </div>
                             </div>
 
@@ -68,8 +68,8 @@
                                 </button>
                                 <!-- Sub-menu -->
                                 <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[200%]">
-                                    <a href="{{ route('admin.cells.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Announcements</a>
-                                    <a href="{{ route('admin.venues.create') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create Announcement</a>
+                                    <a href="{{ route('admin.announcements.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Announcements</a>
+                                    <a href="{{ route('admin.announcements.create') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create Announcement</a>
                                 </div>
                             </div>
 
@@ -79,8 +79,8 @@
                                 </button>
                                 <!-- Sub-menu -->
                                 <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[350%]">
-                                    <a href="{{ route('admin.cells.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Users</a>
-                                    <a href="{{ route('admin.cells.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create User</a>
+                                    <a href="{{ route('admin.staff.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Users</a>
+                                    <a href="{{ route('admin.staff.create') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create User</a>
                                 </div>
                             </div>
                             
@@ -151,8 +151,8 @@
                     </button>
                     <!-- Sub-menu for Mobile -->
                     <div class="hidden bg-slate-50 rounded-md" id="users-sub-menu-mobile">
-                        <a href="{{ route('admin.cells.index') }}" class="block px-4 py-2 hover:bg-gray-200">Manage Users</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Create User</a>
+                        <a href="{{ route('admin.staff.index') }}" class="block px-4 py-2 hover:bg-gray-200">Manage Users</a>
+                        <a href="{{ route('admin.staff.create') }}" class="block px-4 py-2 hover:bg-gray-200">Create User</a>
                     </div>
                 </div>
 

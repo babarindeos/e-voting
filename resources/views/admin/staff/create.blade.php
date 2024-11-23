@@ -6,7 +6,11 @@
             <div class="flex border-b border-gray-300 py-2 justify-between">
                     <div >
                         <h1 class="text-2xl font-semibold font-serif text-gray-800">Create Staff</h1>
-                    </div>                
+                    </div>    
+                    <div>
+                            <a href="{{ route('admin.staff.index') }}" class="border text-green-600 border-green-600 hover:text-white py-2 px-6 
+                                            rounded-lg text-sm hover:bg-green-500 hover:border-green-500">Staff</a>
+                    </div>               
             </div>
             
         </section>
@@ -172,6 +176,40 @@
                             
                         </div><!-- end of middlename //-->
 
+                        <!-- Department //-->
+                        <div class="flex flex-col border-red-900 w-[80%] md:w-[60%] py-2">
+                                
+                                
+                            <select name="department" id='department' class="border border-1 border-gray-400 bg-gray-50
+                                                                     w-full p-4 rounded-md 
+                                                                     focus:outline-none
+                                                                     focus:border-blue-500 
+                                                                     focus:ring
+                                                                     focus:ring-blue-100"                                                                                                                                                                                                                                                                                                                                                
+                                                                     
+                                                                     style="font-family:'Lato';font-size:16px;font-weight:500;"
+                                                                     required
+                                                                     >
+                                                                    <option value=''>-- Select Department --</option>
+                                                                
+                                                                    @foreach($departments as $department)
+                                                                        <option class='py-4' value="{{$department->id}}">{{$department->name}} ({{$department->code}})</option>
+                                                                    @endforeach                                                                    
+                                                                    
+                                                                                                                                           
+                                                                    </select>
+
+                                                                     @error('department')
+                                                                        <span class="text-red-700 text-sm">
+                                                                            {{$message}}
+                                                                        </span>
+                                                                     @enderror
+                            
+                        </div>
+                        
+                        <!-- end of Department //-->
+                        
+
 
                         <!-- Email //-->
                         <div class="flex flex-col border-red-900 w-[80%] md:w-[60%] py-3">
@@ -217,7 +255,7 @@
                                                                      >
                                                                     <option value=''>-- Select Role --</option>
                                                                         <option value='staff'>Staff</option> 
-                                                                        <option value='manager'>Manager</option>                                                                   
+                                                                        <option value='admin'>Admin</option>                                                                   
                                                                     </select>
 
                                                                      @error('role')

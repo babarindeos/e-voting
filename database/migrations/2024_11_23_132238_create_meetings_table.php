@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('announcements', function (Blueprint $table) {
+        Schema::create('meetings', function (Blueprint $table) {
             $table->id();
-            $table->string('subject');
-            $table->text('message');
-            $table->string('link')->nullable();
-            $table->string('file')->nullable();
-            $table->string('filesize')->nullable();
-            $table->string('filetype')->nullable();
+            $table->string('title');
+            $table->date('date');
+            $table->string('time');
+            $table->string('venue');
             $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('announcements');
+        Schema::dropIfExists('meetings');
     }
 };

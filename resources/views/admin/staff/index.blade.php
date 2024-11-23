@@ -8,8 +8,8 @@
                         <h1 class="text-2xl font-semibold font-serif text-gray-800">Staff</h1>
                     </div>
                     <div>
-                            <a href="{{ route('admin.staff.create') }}" class="bg-green-600 text-white py-2 px-4 
-                                            rounded-lg text-sm hover:bg-green-500">New Staff</a>
+                            <a href="{{ route('admin.staff.create') }}" class="border text-green-600 border-green-600 hover:text-white py-2 px-6 
+                                            rounded-lg text-sm hover:bg-green-500 hover:border-green-500">New Staff</a>
                     </div>
             </div>
         </section>
@@ -56,12 +56,18 @@
                                     <tr class="border border-b border-gray-200 ">
                                         <td class='text-center py-4'>{{ ++$counter }}.</td>
                                         <td>{{ $staff->fileno }}</td>
-                                        <td>{{ $staff->surname }} {{ $staff->firstname }} {{ $staff->middlename }}</td>
-
                                         <td>
-                                            @if ( $staff->profile != null)
-                                                {{ $staff->profile->designation }}
-                                            @endif
+                                            {{ $staff->surname }} {{ $staff->firstname }} {{ $staff->middlename }}
+                                            <small>                                             
+                                                    @if ( $staff->profile != null)
+                                                        {{ $staff->profile->designation }}
+                                                    @endif                                      
+                                            </small>
+                                        </td>
+
+                                        
+                                        <td>
+                                            {{ $staff->department->name }}
                                         </td>
                                         <td class="text-center">
                                             <span class="px-1">

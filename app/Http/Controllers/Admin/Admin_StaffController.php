@@ -32,7 +32,7 @@ class Admin_StaffController extends Controller
 
         //$colleges = College::orderBy('college_name', 'asc')->get();
         $ministries = Ministry::orderBy('name', 'asc')->get();
-        $departments = Department::orderBy('department_name', 'asc')->get();
+        $departments = Department::orderBy('name', 'asc')->get();
         return view('admin.staff.create')->with(['ministries'=>$ministries, 'departments'=>$departments]);
 
     }
@@ -51,6 +51,7 @@ class Admin_StaffController extends Controller
             'surname' => 'required | string',
             'firstname' => ['required', 'string'],        
             'email' => 'required|email|unique:users,email',
+            'department' => 'required',
             'role' => 'required | string'
         ]);
 
@@ -73,6 +74,7 @@ class Admin_StaffController extends Controller
         $formFields['firstname'] = ucfirst($formFields['firstname']);
         $formFields['middlename'] = ucfirst($request->input('middlename'));
         $formFields['email'] = strtolower($formFields['email']);
+        $formFields['department_id'] = $request->department;
 
 
         DB::beginTransaction();
@@ -158,8 +160,8 @@ class Admin_StaffController extends Controller
 
 
     public function edit(Request $request, Staff $staff){
-        $departments = Department::orderBy('department_name', 'asc')->get();
-        $colleges = College::orderBy('college_name', 'asc')->get();
+        $departments = Department::orderBy('name', 'asc')->get();
+        $colleges = College::orderBy('name', 'asc')->get();
 
         return view('admin.staff.edit', compact('staff', 'colleges', 'departments'));
     }
@@ -172,11 +174,11 @@ class Admin_StaffController extends Controller
             'fileno' => 'required | string',
             'surname' => 'required | string',
             'firstname' => 'required | string',
-            'middlename' => 'required | string',
         ]);
 
         
         $formFields['department_id'] = $request->input('department');
+        $formFields['middlename'] = $request->middlename;
 
         try{
             $update = $staff->update($formFields);
