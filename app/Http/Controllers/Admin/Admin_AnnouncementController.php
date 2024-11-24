@@ -32,13 +32,13 @@ class Admin_AnnouncementController extends Controller
     
         public function store(Request $request)
         {
-            $formfields = $request->validate([
+            $formFields = $request->validate([
                 'subject' => 'required',
                 'message' => 'required|max:2000'
             ]);
     
             
-            $formfields['link'] = $request->input('link');
+            $formFields['link'] = $request->input('link');
     
             $file = '';
             $fileSize = '';
@@ -58,15 +58,17 @@ class Admin_AnnouncementController extends Controller
                     $new_filename = $filename.$file->getClientOriginalExtension();
         
                     $file->storeAs('announcements', $new_filename);    
+
+                    $formFields['file'] = 'announcements/'.$new_filename;
+                    $formFields['filesize'] = $fileSize;
+                    $formFields['filetype'] = $fileType;
                 }
     
-                $formfields['file'] = 'announcements/'.$new_filename;
-                $formfields['filesize'] = $fileSize;
-                $formfields['filetype'] = $fileType;
-                $formfields['user_id'] = Auth::user()->id;
+               
+                $formFields['user_id'] = Auth::user()->id;
     
     
-                $created = Announcement::create($formfields);
+                $created = Announcement::create($formFields);
     
                 if ($created)
                 {

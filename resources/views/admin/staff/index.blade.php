@@ -71,6 +71,12 @@
                                         </td>
                                         <td class="text-center">
                                             <span class="px-1">
+                                                <a class="bg-purple-400 hover:bg-purple-500 text-white rounded-md px-4 py-1 text-xs"
+                                                    href="{{ route('admin.profile.user_profile', ['fileno'=> $staff->fileno])}}">
+                                                    Permissions
+                                                </a>
+                                            </span>
+                                            <span class="px-1">
                                                 <a class="bg-green-400 hover:bg-green-500 text-white rounded-md px-4 py-1 text-xs"
                                                     href="{{ route('admin.profile.user_profile', ['fileno'=> $staff->fileno])}}">
                                                     View

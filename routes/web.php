@@ -43,6 +43,7 @@ use App\Http\Controllers\Admin\Admin_VenueController;
 use App\Http\Controllers\Admin\Admin_AnnouncementController;
 
 use App\Http\Controllers\Admin\Admin_MeetingController;
+use App\Http\Controllers\Admin\Admin_MeetingCommentController;
 
 
 
@@ -481,10 +482,11 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
     Route::get('meetings/{meeting}/show', [Admin_MeetingController::class, 'show'])->name('admin.meetings.show');
     Route::get('meetings/{meeting}/edit', [Admin_MeetingController::class, 'edit'])->name('admin.meetings.edit');
     Route::post('meetings/{meeting}/update', [Admin_MeetingController::class, 'update'])->name('admin.meetings.update');
-    Route::get('meetings/{meeting}/confirm_delete', [Admin_MeetingController::class, 'confirm_delete'])->name('admin.meetings.comfirm_delete');
-    Route::post('meetings/{meeting}/destroy', [Admin_MeetingController::class, 'show'])->name('admin.meetings.destroy');
+    Route::get('meetings/{meeting}/confirm_delete', [Admin_MeetingController::class, 'confirm_delete'])->name('admin.meetings.confirm_delete');
+    Route::delete('meetings/{meeting}/delete', [Admin_MeetingController::class, 'destroy'])->name('admin.meetings.delete');
     
-
+    Route::post('meetings/{meeting}/comments/store', [Admin_MeetingCommentController::class, 'store'])->name('admin.meetings.comments.store');
+    Route::delete('meetings/{comment}/comments/delete', [Admin_MeetingCommentController::class, 'destroy'])->name('admin.meetings.comments.delete_comment');
 });
 
 

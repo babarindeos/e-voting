@@ -149,7 +149,7 @@
                         </div>
                         <!-- end of file //-->      
                          
-                        @if ($announcement->file!=null || $$announcement->file=='')
+                        @if ($announcement->file!=null || $announcement->file=='')
                                     <div class="flex flex-row w-text-sm w-[80%] md:w-[60%] ">
                                             <i class="fa-solid fa-paperclip"></i> 
                                             <a href="{{ asset('storage/'.$announcement->file) }}" target="_blank" class="hover:underline">

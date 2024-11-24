@@ -11,19 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('meetings', function (Blueprint $table) {
+        Schema::create('meeting_comments', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->date('date');
-            $table->time('time');
-            $table->string('venue');
-            $table->text('message');
-            $table->string('file')->nullable();
-            $table->string('filesize')->nullable();
-            $table->string('filetype')->nullable();
-            $table->string('link')->nullable();
+            $table->unsignedBigInteger('meeting_id');
+            $table->foreign('meeting_id')->references('id')->on('meetings')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->text('message');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('meetings');
+        Schema::dropIfExists('meeting_comments');
     }
 };

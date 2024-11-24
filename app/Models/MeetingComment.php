@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Meeting extends Model
+class MeetingComment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'date', 'time', 'venue', 'message', 'link', 'file', 'filesize', 'filetype', 'user_id'];
+    protected $fillable = ['meeting_id', 'user_id', 'message'];
 
     public function sender()
     {
