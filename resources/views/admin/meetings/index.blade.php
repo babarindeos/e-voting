@@ -73,7 +73,7 @@
                                                 @endif  
 
                                                 <div>
-                                                    Comments (0)
+                                                    Comments ({{ $meeting->comments->count() }})
                                                 </div>
 
                                                 <div>
@@ -81,7 +81,7 @@
                                                 </div>
 
                                                 <div>
-                                                    Papers (0)
+                                                    Papers ( {{ $meeting->papers->count() }} )
                                                 </div>
 
                                     </div>
@@ -99,7 +99,7 @@
                                 <td>
                                             <span class="text-sm">
                                                 <a class="hover:bg-green-500 bg-green-400 text-white rounded-md 
-                                                        px-4 py-1 text-xs" href="{{ route('admin.meetings.edit', ['meeting' => $meeting->id]) }}">Agenda</a>
+                                                        px-4 py-1 text-xs" href="{{ route('admin.meetings.agenda', ['meeting' => $meeting->id]) }}">Agenda</a>
                                             </span>
                                             <span class="text-sm">
                                                 <a class="hover:bg-blue-500 bg-blue-400 text-white rounded-md 

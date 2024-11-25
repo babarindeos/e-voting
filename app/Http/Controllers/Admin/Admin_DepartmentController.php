@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\College;
 use App\Models\Department;
+use App\Models\Staff;
 
 class Admin_DepartmentController extends Controller
 {
@@ -121,6 +122,24 @@ class Admin_DepartmentController extends Controller
 
     public function destroy(Department $department)
     {
+        $staff_department = Staff::where('department_id', $department->id)->exists();
+
+        if ($staff_department)
+        {
+            $data = [
+                'error' => true,
+                'status' => 'fail',
+                'message' => "The Department cannot be deleted as it's already in Staff use"
+            ];
+
+            return redirect()->back()->with($data);
+        }
+
+
+        $department->delete();
+
+        return redirect()->route('admin.departments.index');
+
 
     }
 

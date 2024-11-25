@@ -44,6 +44,11 @@ use App\Http\Controllers\Admin\Admin_AnnouncementController;
 
 use App\Http\Controllers\Admin\Admin_MeetingController;
 use App\Http\Controllers\Admin\Admin_MeetingCommentController;
+use App\Http\Controllers\Admin\Admin_PaperController;
+
+use App\Http\Controllers\Admin\Admin_PaperCommentController;
+use App\Http\Controllers\Admin\Admin_AgendaController;
+use App\Http\Controllers\Admin\Admin_DigestController;
 
 
 
@@ -487,6 +492,50 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
     
     Route::post('meetings/{meeting}/comments/store', [Admin_MeetingCommentController::class, 'store'])->name('admin.meetings.comments.store');
     Route::delete('meetings/{comment}/comments/delete', [Admin_MeetingCommentController::class, 'destroy'])->name('admin.meetings.comments.delete_comment');
+
+
+    // Papers
+    Route::get('papers', [Admin_PaperController::class, 'index'])->name('admin.papers.index');
+    Route::get('papers/create', [Admin_PaperController::class, 'create'])->name('admin.papers.create');
+    Route::post('papers/store', [Admin_PaperController::class, 'store'])->name('admin.papers.store');
+    Route::get('papers/{paper}/show', [Admin_PaperController::class, 'show'])->name('admin.papers.show');
+    Route::get('papers/{paper}/edit', [Admin_PaperController::class, 'edit'])->name('admin.papers.edit');
+    Route::post('papers/{paper}/update', [Admin_PaperController::class, 'update'])->name('admin.papers.update');
+    Route::get('papers/{paper}/confirm_delete', [Admin_PaperController::class, 'confirm_delete'])->name('admin.papers.confirm_delete');
+    Route::delete('papers/{paper}/delete', [Admin_PaperController::class, 'destroy'])->name('admin.papers.delete');
+
+    Route::get('papers/{paper}/set_status', [Admin_PaperController::class, 'set_status'])->name('admin.papers.set_status');
+    Route::post('papers/{paper}/set_status', [Admin_PaperController::class, 'update_status'])->name('admin.papers.update_status');
+
+    Route::post('papers/{paper}/comments/store', [Admin_PaperCommentController::class, 'store'])->name('admin.papers.comments.store');
+    Route::delete('papers/{comment}/comments/delete', [Admin_PaperCommentController::class, 'destroy'])->name('admin.meetings.papers.delete_comment');
+
+
+    // Agenda
+    Route::get('meetings/{meeting}/agenda', [Admin_AgendaController::class, 'index'])->name('admin.meetings.agenda');
+    Route::post('meetings/{meeting}/agenda/store', [Admin_AgendaController::class, 'store'])->name('admin.meetings.agenda.store');
+    Route::delete('meetings/{agenda}/agenda/delete',[Admin_AgendaController::class, 'delete'])->name('admin.meetings.agenda.delete');
+
+
+    // Digests
+    Route::get('digests', [Admin_DigestController::class, 'index'])->name('admin.digests.index');
+    Route::get('digests/create', [Admin_DigestController::class, 'create'])->name('admin.digests.create');
+    Route::post('digests/store', [Admin_DigestController::class, 'store'])->name('admin.digests.store');
+    Route::get('digests/{digest}/edit', [Admin_DigestController::class, 'edit'])->name('admin.digests.edit');
+    Route::post('digests/{digest}/update', [Admin_DigestController::class, 'update'])->name('admin.digests.update');
+    Route::get('digests/{digest}/confirm_delete', [Admin_DigestController::class, 'confirm_delete'])->name('admin.digests.confirm_delete');
+    Route::post('digests/{digest}/delete', [Admin_DigetController::class, 'destroy'])->name('admin.digests.delete');
+
+
+    // Minutes
+    Route::get('minutes', [Admin_DigestController::class, 'index'])->name('admin.minutes.index');
+    Route::get('minutes/create', [Admin_DigestController::class, 'create'])->name('admin.minutes.create');
+    Route::post('minutes/store', [Admin_DigestController::class, 'store'])->name('admin.minutes.store');
+    Route::get('minutes/{minute}/edit', [Admin_DigestController::class, 'edit'])->name('admin.minutes.edit');
+    Route::post('minutes/{minute}/update', [Admin_DigestController::class, 'update'])->name('admin.minutes.update');
+    Route::get('minutes/{minute}/confirm_delete', [Admin_DigestController::class, 'confirm_delete'])->name('admin.minutes.confirm_delete');
+    Route::post('minutes/{minute}/delete', [Admin_DigetController::class, 'destroy'])->name('admin.minutes.delete');
+
 });
 
 

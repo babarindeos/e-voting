@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\College;
+use App\Models\Department;
 
 class Admin_CollegeController extends Controller
 {
@@ -124,6 +125,24 @@ class Admin_CollegeController extends Controller
 
     public function destroy(Request $request, College $college){
 
+        // check if college has been used
+
+        $college_department = Department::where('college_id', $college->id)->exists();
+
+        if ($college_department)
+        {
+            $data = [
+                'error' => true,
+                'status' => 'fail',
+                'message' => "The College cannot be deleted because it's already in use."
+            ];
+
+            return redirect()->back()->with($data);
+        }
+
+        $college->delete();
+
+        return redirect()->route('admin.colleges.index');
     }
 
 

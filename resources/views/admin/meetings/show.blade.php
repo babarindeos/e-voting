@@ -10,6 +10,12 @@
 
                             <a href="{{ route('admin.meetings.index') }}" class="border border-green-600 text-green-600 py-2 px-6 
                                             rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">Meetings</a>
+                            
+                            <a href="{{ route('admin.meetings.index') }}" class="border border-green-600 text-green-600 py-2 px-6 
+                                            rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">Agenda</a>
+
+                            <a href="{{ route('admin.meetings.index') }}" class="border border-green-600 text-green-600 py-2 px-6 
+                                            rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">Attendance</a>
                 </div>
                 
         </section>  
@@ -129,6 +135,91 @@
 
                                              {!!  nl2br(e($meeting->message)) !!}
                                     </div>
+
+
+
+
+                                    <!-- Agenda //-->
+
+                                    @if ($agenda->count())
+                                                <!-- Section //-->
+                                                <section class="py-6">
+                                                        <div class="flex border-0 flex-col w-[100%] md:w-[100%] py-2 md:py-4 md:px-1 mx-auto" >
+                                                                <div class="font-semibold text-lg py-2">
+                                                                        Substantive Senate Business
+                                                                </div>
+                                                                <div class="font-semibold text-md border-b py-2">
+                                                                        Agenda
+                                                                </div>
+                                                                <div>
+                                                                    <table width="100%" cellpadding="5">
+                                                                        <thead>
+                                                                            <tr class="border-b bg-green-100">
+                                                                                <th class="py-4" width="10%">SN</th>
+                                                                                <th class="text-left">Items</th>
+                                                                               
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @php
+                                                                                $counter = 0;
+                                                                            @endphp
+                                                                        
+                                                                            @foreach($agenda as $agendum)
+                                                                                <tr class="border-b">
+                                                                                    <td class='text-center py-4'>
+                                                                                        {{ ++$counter }}.
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        {{ $agendum->title}}
+                                                                                        <div>
+                                                                                            @if ($agendum->paper_id !=null)
+                                                                                                        <a class='underline' target="_blank" href="{{ route('admin.papers.show',['paper'=>$agendum->paper_id]) }}">
+                                                                                                            {{ $agendum->paper->title}} ({{ $agendum->paper->paper_no }})
+                                                                                                        </a>
+                                                                                                        <span class='text-xs border px-2 rounded-md'>Paper</span>
+
+                                                                                                        @if ($agendum->paper->file!="")
+                                                                                                                        <div class="text-sm">
+                                                                                                                                <i class="fa-solid fa-paperclip"></i> 
+                                                                                                                                <a href="{{ asset('storage/'.$agendum->paper->file) }}" target="_blank" class="hover:underline">
+                                                                                                                                File Attachment - <span class='text-xs'> {{ $agendum->paper->filetype}} ({{ $agendum->paper->filesize }})</span>
+                                                                                                                                </a>
+                                                                                                                        </div>
+                                                                                                                        <!-- end of file attachment //-->
+                                                                                                        @endif
+                                                                                            @endif
+                                                                                            
+
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    
+                                                                                </tr>
+                                                                            @endforeach
+
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+
+                                                        </div>
+                                                </section>
+
+                                            <!-- end of Section //-->
+                                    @endif
+
+
+
+
+
+                                    <!-- end of Agenda //-->
+
+
+
+
+
+
+
 
                                 </div>
                                 <!-- meeting body //-->

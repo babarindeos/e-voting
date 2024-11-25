@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Http\Classes\Document;
 use Illuminate\Support\Facades\Auth;
 use App\Models\MeetingComment;
+use App\Models\Agenda;
 
 class Admin_MeetingController extends Controller
 {
@@ -210,10 +211,13 @@ class Admin_MeetingController extends Controller
 
     public function show(Meeting $meeting)
     {
+
+        $agenda = Agenda::where('meeting_id', $meeting->id)->get();
+
         $comments = MeetingComment::where('meeting_id', $meeting->id)
                                     ->orderBy('id', 'desc')
                                     ->get();
 
-        return view('admin.meetings.show', compact('meeting', 'comments'));
+        return view('admin.meetings.show', compact('meeting', 'comments', 'agenda'));
     }
 }

@@ -45,7 +45,7 @@
                                     <a href="{{ route('admin.meetings.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Meetings</a>
                                     <a href="{{ route('admin.meetings.create') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create Meeting</a>
                                     <a href="#" class="flex flex-row px-4 py-2 hover:bg-gray-200 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Meeting Notification</a>
-                                    <a href="" class="flex flex-row px-4 py-2 hover:bg-green-500 hover:text-white  hover:border-l-yellow-500 hover:border-l-4 pr-8">Minutes of Meeting</a>
+                                    <a href="" class="flex flex-row px-4 py-2 hover:bg-green-500 hover:text-white  hover:border-l-yellow-500 hover:border-l-4 pr-8">Meeting Reminder</a>
                                 </div>
                             </div>
 
@@ -56,9 +56,9 @@
                                 </button>
                                 <!-- Sub-menu -->
                                 <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[260%]">
-                                    <a href="{{ route('admin.cells.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Papers</a>
-                                    <a href="{{ route('admin.cells.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Digests</a>
-                                    <a href="#" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Minutes</a>
+                                    <a href="{{ route('admin.papers.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Papers</a>
+                                    <a href="{{ route('admin.digests.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Digests</a>
+                                    <a href="{{ route('admin.minutes.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Minutes</a>
                                 </div>
                             </div>
 

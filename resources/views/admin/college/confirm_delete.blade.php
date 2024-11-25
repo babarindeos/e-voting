@@ -28,6 +28,7 @@
                     @method("delete")    
                     @csrf
 
+                        @include('partials._session_response')
                         
 
                         <div class="flex flex-col w-[80%] md:w-[60%] py-2 md:py-4" style="font-family:'Lato'; font-size:18px; font-weight:400;">
