@@ -25,4 +25,9 @@ class Meeting extends Model
     {
         return $this->hasMany(Agenda::class, 'meeting_id', 'id');
     }
+
+    public function minutes()
+    {
+        return $this->hasMany(Minute::class, 'meeting_id', 'id');
+    }
 }

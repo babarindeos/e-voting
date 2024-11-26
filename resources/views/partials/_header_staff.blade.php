@@ -14,8 +14,8 @@
                     <!-- end of logo //-->
                     <!-- Name //-->
                     <div class="flex flex-col item-center justify-center">
-                            <div class="text-white font-bold text-2xl font-serif">FUNAAB WorkPlace</div>
-                            <div class="text-white font-semibold font-serif text-xs opacity-70">Where work happens...</div>
+                            <div class="text-white font-bold text-2xl font-serif">FUNAAB e-Senate</div>
+                            <div class="text-white font-semibold font-serif text-sm opacity-75">Federal University of Agriculture Abeokuta</div>
                                 
                     </div>
                     <!-- end of name //-->
@@ -32,22 +32,16 @@
                     @auth
                         @if (Auth::user()->role==='staff')
 
-                            <a href='{{ route('staff.dashboard.index') }}' class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-2 ">Dashboard</a>
+                            <a href="{{ route('staff.dashboard.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-2 ">Dashboard</a>
 
-                            <div class="relative group flex item-center border-0">
-                                
-                                    <button class="text-white px-1 py-2 rounded-md font-semibold border-0 border-red-900">
-                                        Office
-                                    </button>
-                                
-                                    <!-- Sub-menu -->
-                                    <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-2 top-10 py-2 rounded-md shadow-lg ">
-                                        <a href="{{ route('staff.circles.index') }}" class="flex flex-row px-4 py-2 hover:bg-gray-200 hover:border-l-yellow-500 hover:border-l-4 pr-8">Circles</a>
-                                        
-                                    </div>
-                            </div>                            
-                            <a  href='{{ route('staff.document.index') }}' class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-3 ">Documents</a>
+                                       
+                            <a  href="{{ route('staff.meetings.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-3 ">Meetings</a>
                             
+                            <a  href="{{ route('staff.document.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-3 ">Papers</a>
+
+                            <a  href="{{ route('staff.document.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-3 ">Minutes</a>
+
+                            <a  href="{{ route('staff.document.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-3 ">Digests</a>
                             
                             <div class="relative group flex">
                                 <button class="text-white px-1 py-2 rounded-md font-semibold flex items-center">

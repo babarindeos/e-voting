@@ -1,4 +1,4 @@
-<x-admin-layout>
+<x-staff-layout>
 
     <div class="flex flex-col border-0 w-[95%] mx-auto">
         <section class="flex flex-row justify-between border-b border-gray-200 py-2 mt-6">
@@ -11,10 +11,10 @@
                             <a href="{{ route('admin.meetings.index') }}" class="border border-green-600 text-green-600 py-2 px-6 
                                             rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">Meetings</a>
                             
-                            <a href="{{ route('admin.meetings.agenda',['meeting'=>$meeting->id]) }}" class="border border-green-600 text-green-600 py-2 px-6 
+                            <a href="{{ route('admin.meetings.index') }}" class="border border-green-600 text-green-600 py-2 px-6 
                                             rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">Agenda</a>
 
-                            <a href="{{ route('admin.attendance.register',['meeting'=>$meeting->id] ) }}" class="border border-green-600 text-green-600 py-2 px-6 
+                            <a href="{{ route('admin.meetings.index') }}" class="border border-green-600 text-green-600 py-2 px-6 
                                             rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">Attendance</a>
                 </div>
                 
@@ -378,4 +378,4 @@
 
 
     </div>
-</x-admin-layout>
+</x-staff-layout>

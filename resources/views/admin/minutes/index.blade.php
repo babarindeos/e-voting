@@ -8,12 +8,12 @@
         
             <div class="flex border-b border-gray-300 py-2 justify-between">
                     <div>
-                        <h1 class="text-2xl font-semibold font-serif text-gray-800">Digests</h1>
+                        <h1 class="text-2xl font-semibold font-serif text-gray-800">Minutes</h1>
                     </div>
                     <div>
 
-                            <a href="{{ route('admin.digests.create') }}" class="border border-green-600 text-green-600 py-2 px-6 
-                                            rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">New Digest</a>
+                            <a href="{{ route('admin.minutes.create') }}" class="border border-green-600 text-green-600 py-2 px-6 
+                                            rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">New Minutes</a>
                     </div>
             </div>
         </section>
@@ -30,14 +30,14 @@
                    
 
 
-        @if ($digests->count())
+        @if ($minutes->count())
                     <table class="table-auto border-collapse border border-1 border-gray-200 w-full">
                         <thead>
                             <tr class="bg-gray-200">
                                 <th width='5%' class="text-center font-semibold py-2 ">SN</th>
                                 <th width='20%' class="font-semibold py-2 text-left">Title</th>
                                 <th width='20%' class="font-semibold py-2 text-left">File</th> 
-                                <th width='30%' class="font-semibold py-2 text-left">Note</th>                                
+                                <th width='25%' class="font-semibold py-2 text-left">Note</th>                                
                                 <th width='8%' class="font-semibold py-2 text-left">Date Published</th> 
                                 <th width='25%' class="font-semibold py-2 text-left">Actions</th> 
                                                         
@@ -45,22 +45,22 @@
                         </thead>
                         <tbody>
                             @php
-                                $counter = ($digests->currentPage() - 1) * $digests->perPage();
+                                $counter = ($minutes->currentPage() - 1) * $minutes->perPage();
                             @endphp
-                            @foreach($digests as $digest)
+                            @foreach($minutes as $minute)
                             <tr class="border border-b border-gray-200 ">
                                 <td class='text-center py-4'>{{ ++$counter }}.</td>
                                 <td class="py-2 pr-4">
                                     
-                                        {{ $digest->title }}
+                                        {{ $minute->title }}
                                 
                                 </td>
                                 <td>
-                                                            @if ($digest->file!="")
+                                                            @if ($minute->file!="")
                                                                     <div class="text-sm">
                                                                             <i class="fa-solid fa-paperclip"></i> 
-                                                                            <a href="{{ asset('storage/'.$digest->file) }}" target="_blank" class="hover:underline">
-                                                                            File Attachment - <span class='text-xs'> {{ $digest->filetype}} ({{ $digest->filesize }})</span>
+                                                                            <a href="{{ asset('storage/'.$minute->file) }}" target="_blank" class="hover:underline">
+                                                                            File Attachment - <span class='text-xs'> {{ $minute->filetype}} ({{ $minute->filesize }})</span>
                                                                             </a>
                                                                     </div>
                                                                     <!-- end of file attachment //-->
@@ -69,14 +69,14 @@
 
                                 </td>
                                 <td>
-                                        {{ $digest->note }}
+                                        {{ $minute->note }}
                                 </td>
 
                                 <td width="20%" class="text-sm">
                                         <div class="px-0">
-                                            {{ $digest->created_at->format('l jS F, Y')}}
+                                            {{ $minute->created_at->format('l jS F, Y')}}
                                             <div class="text-xs">
-                                                {{ $digest->created_at->format('@ g:i a') }}
+                                                {{ $minute->created_at->format('@ g:i a') }}
                                             </div>
                                         </div>
                                 </td>
@@ -84,11 +84,11 @@
                                            
                                             <span class="text-sm">
                                                 <a class="hover:bg-blue-500 bg-blue-400 text-white rounded-md 
-                                                        px-4 py-1 text-xs" href="{{ route('admin.digests.edit', ['digest' => $digest->id]) }}">Edit</a>
+                                                        px-4 py-1 text-xs" href="{{ route('admin.minutes.edit', ['minute' => $minute->id]) }}">Edit</a>
                                             </span>
                                             <span> 
                                                 <a class="hover:bg-red-500 bg-red-400 text-white rounded-md 
-                                                        px-4 py-1 text-xs" href="{{ route('admin.digests.confirm_delete', ['digest'=> $digest->id])}}"
+                                                        px-4 py-1 text-xs" href="{{ route('admin.minutes.confirm_delete', ['minute'=> $minute->id])}}"
                                                 >Delete</a>
                                             </span>	
 
@@ -102,13 +102,13 @@
                     </table>
 
                     <div>
-                        {{ $digests->links() }}
+                        {{ $minutes->links() }}
                     </div>
 
             @else
                     <section class="flex flex-col w-[95%] md:w-[95%] mx-auto px-0 py-8 border-0">
                         <div class="flex flex-row border-0 justify-center text-2xl font-semibold text-gray-300">
-                                There is currently no Digests
+                                There is currently no Minutes
                         </div>
                     </section>
             @endif

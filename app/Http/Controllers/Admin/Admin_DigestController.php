@@ -92,4 +92,90 @@ class Admin_DigestController extends Controller
 
         return redirect()->back()->with($data);
     }
+
+    public function edit(Digest $digest)
+    {
+        return view('admin.digests.edit', compact('digest'));
+    }
+
+    public function update(Request $request, Digest $digest)
+    {
+        $formFields = $request->validate([
+            'title' => 'required|string',
+        ]);
+
+        $formFields['note'] = $request->note;
+       
+        $file = '';
+        $fileSize = '';
+        $fileType = '';
+
+        try
+        {
+            if ($request->hasFile('file'))
+            {
+                $currentDateTime = Carbon::now()->format('Ymd_His');
+                $filename = $currentDateTime.'_'.auth()->user()->id;
+                $filename = $filename.".";
+    
+                $file = $request->file('file');
+                $fileSize = Document::getDocumentSize($file);
+                $fileType = Document::getDocumentType($file);
+    
+                $new_filename = $filename.$file->getClientOriginalExtension();
+    
+                $file->storeAs('digests', $new_filename);    
+
+                $formFields['file'] = 'digests/'.$new_filename;
+                $formFields['filesize'] = $fileSize;
+                $formFields['filetype'] = $fileType;
+            }
+
+            
+            $formFields['user_id'] = Auth::user()->id;
+
+
+            $update = $digest->update($formFields);
+
+            if ($update)
+            {
+                $data = [
+                    'error' => true,
+                    'status' => 'success',
+                    'message' => 'The Digest has been successfully updated'
+                ];
+            }
+            else
+            {
+                $data = [
+                    'error' => true,
+                    'status' => 'fail',
+                    'message' => 'An error occurred updating the Digest'
+                ];
+
+            }    
+        }
+        catch(\Exception $e)
+        {
+                $data = [
+                    'error' => true,
+                    'status' => 'fail',
+                    'message' => 'An error occurred -'.$e->getMessage()
+                ];
+        }
+
+        return redirect()->back()->with($data);
+    }
+
+    public function confirm_delete(Digest $digest)
+    {
+        return view('admin.digests.confirm_delete', compact('digest'));
+    }
+
+    public function destroy(Digest $digest)
+    {
+        $digest->delete();
+
+        return redirect()->route('admin.digests.index');
+    }
 }

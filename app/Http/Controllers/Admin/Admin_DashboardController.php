@@ -9,122 +9,38 @@ use App\Models\Staff;
 use App\Models\User;
 use App\Models\Workflow;
 use App\Models\Department;
+use App\Models\Digest;
+use App\Models\Paper;
+use App\Models\Meeting;
 use Illuminate\Support\Facades\DB;
+use App\Models\Announcement;
+use App\Models\Minute;
 
 class Admin_DashboardController extends Controller
 {
     //
     public function index(){
 
-        $documents_count = Document::count();
-        $users_count = User::count();
+        $meeting_count = Meeting::count();
         $staff_count = Staff::count();
-        $workflows_count = Workflow::count();
-        $departments_count = Department::count();
+        $digest_count = Digest::count();
+        $paper_count = Paper::count();
+        $department_count = Department::count();
 
-        /* $ministries_documents = DB::table("documents")
-                                    ->join("users", "documents.uploader","=", "users.id")
-                                    ->join("staff", "users.id", "staff.user_id")
-                                    ->join("departments", "staff.department_id", "departments.id")
-                                    ->join("ministries", "departments.ministry_id", "ministries.id")
-                                    ->select("users.*", "staff.*", "departments.*", "ministries.*", "uploader")->groupBy("users.id")->get(); */
+        $announcements = Announcement::orderBy('created_at', 'desc')->take(1)->get();
 
-        /* $ministries_documents = DB::table("documents")
-                                ->join("users", "documents.uploader","=", "users.id")
-                                ->join("staff", "users.id", "=", "staff.user_id")
-                                ->join("departments", "staff.department_id", "=", "departments.id")
-                                ->join("ministries", "departments.ministry_id", "=", "ministries.id")
-                                ->select("ministries.name", DB::raw("COUNT(documents.id) as document_count"))->groupBy("ministries.name")->get();
+        $meetings = Meeting::orderBy('created_at', 'desc')->take(1)->get();
 
-        $departments_documents = DB::table("documents")
-                                ->join("users", "documents.uploader","=", "users.id")
-                                ->join("staff", "users.id", "=", "staff.user_id")
-                                ->join("departments", "staff.department_id", "=", "departments.id")        
-                                ->select("departments.department_name", DB::raw("COUNT(documents.id) as document_count"))->groupBy("departments.department_name")->get();
+        $papers = Paper::orderBy('created_at', 'desc')->take(3)->get();
 
-        $staff_ministries = DB::table("ministries")
-                                ->join("departments", "departments.ministry_id", "=", "ministries.id")
-                                ->join("staff", "staff.department_id", "=", "departments.id")
-                                ->select("ministries.name", DB::raw("COUNT(staff.id) as staff_count"))->groupBy("ministries.name")->get();
-       
-        $staff_departments = DB::table("ministries")
-                                ->join("departments", "departments.ministry_id", "=", "ministries.id")
-                                ->join("staff", "staff.department_id", "=", "departments.id")
-                                ->select("departments.department_name", DB::raw("COUNT(staff.id) as staff_count"))->groupBy("departments.department_name")->get();
-       
-         */
-                
+        $minutes = Minute::orderBy('created_at', 'desc')->take(3)->get();
 
-        /* // Ministry Document Chart Data
-        $ministries_documents_chart_data = [];
-        $item = ['Ministry', 'Documents'];        
-        array_push($ministries_documents_chart_data, $item);
-
-        foreach($ministries_documents as $mds)
-        {
-            $item = [];
-            $item[0] = $mds->name;
-            $item[1] = intval($mds->document_count);
-            array_push($ministries_documents_chart_data, $item);
-        }
- */
-       //dd($ministries_documents_chart_data);
-
-
-      /*  // Department Document Chart Data
-       $departments_documents_chart_data = [];
-       $item = ['Department', 'Documents'];
-       array_push($departments_documents_chart_data, $item);
-
-       foreach($departments_documents as $dds)
-       {
-            $item = [];
-            $item[0] = $dds->department_name;
-            $item[1] = intval($dds->document_count);
-            array_push($departments_documents_chart_data, $item);
-       }
-
-       // Ministry Staff Chart Data
-       $ministries_staff_chart_data = [];
-       $item = ['Ministries', 'Staff'];
-       array_push($ministries_staff_chart_data, $item);
-
-       foreach($staff_ministries as $sm)
-       {
-            $item = [];
-            $item[0] = $sm->name;
-            $item[1] = intval($sm->staff_count);
-            array_push($ministries_staff_chart_data, $item);
-       }
-
-       // Department Staff Chart Data
-       $departments_staff_chart_data = [];
-       $item = ['Departments', 'Staff'];
-       array_push($departments_staff_chart_data, $item);
-
-       foreach($staff_departments as $sd)
-       {
-            $item = [];
-            $item[0] = $sd->department_name;
-            $item[1] = intval($sd->staff_count);
-            array_push($departments_staff_chart_data, $item);
-       }
-
-       //dd($ministries_staff_chart_data);
-
-
-         */
-
-        return view('admin.dashboard')->with([
-            "documents_count" => $documents_count,
-            "users_count" => $users_count,
-            "staff_count" =>$staff_count,
-            "workflows_count" => $workflows_count,
-            "departments_count" => $departments_count,
-           /*  "ministries_documents_chart_data" => $ministries_documents_chart_data,
-            "departments_documents_chart_data" => $departments_documents_chart_data,
-            "ministries_staff_chart_data" => $ministries_staff_chart_data,
-            "departments_staff_chart_data" => $departments_staff_chart_data */
+        return view('admin.dashboard', compact('announcements', 'meetings', 'papers', 'minutes'))->with([
+            "meeting_count" => $meeting_count,
+            "digest_count" => $digest_count,
+            "staff_count" => $staff_count,
+            "paper_count" => $paper_count,
+            "department_count" => $department_count,
         ]);
 
     }

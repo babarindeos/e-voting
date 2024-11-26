@@ -49,6 +49,9 @@ use App\Http\Controllers\Admin\Admin_PaperController;
 use App\Http\Controllers\Admin\Admin_PaperCommentController;
 use App\Http\Controllers\Admin\Admin_AgendaController;
 use App\Http\Controllers\Admin\Admin_DigestController;
+use App\Http\Controllers\Admin\Admin_MinuteController;
+use App\Http\Controllers\Admin\Admin_AttendanceController;
+use App\Http\Controllers\Admin\Admin_NotificationController;
 
 
 
@@ -70,6 +73,7 @@ use App\Http\Controllers\Staff\Staff_CircleAnnouncementController;
 
 
 use App\Http\Controllers\Staff\Staff_CategoryController;
+use App\Http\Controllers\Staff\Staff_MeetingController;
 
 use App\Http\Controllers\MailTestController;
 
@@ -149,6 +153,8 @@ Route::get('testmailbody', function(){
     return new App\Mail\MarkupMail($name);
 
 });
+
+Route::get('queueMail', [MailTestController::class, 'QueueMailer']);
 
 
 
@@ -243,6 +249,14 @@ Route::prefix('staff')->middleware(['auth', 'staff'])->group(function(){
     // Categories
     Route::get('/categories/create', [Staff_CategoryController::class, 'create'])->name('staff.categories.create');
     Route::post('/categories/store', [Staff_CategoryController::class, 'store'])->name('staff.categories.store');
+
+    // Meeting
+    Route::get('meetings', [Staff_MeetingController::class, 'index'])->name('staff.meetings.index');
+    Route::get('meetings/{meeting}/show', [Staff_MeetingController::class, 'show'])->name('staff.meetings.show');
+    Route::post('meetings/{meeting}/comments/store', [Staff_MeetingCommentController::class, 'store'])->name('staff.meetings.comments.store');
+    
+
+
 });
 
 
@@ -524,17 +538,28 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
     Route::get('digests/{digest}/edit', [Admin_DigestController::class, 'edit'])->name('admin.digests.edit');
     Route::post('digests/{digest}/update', [Admin_DigestController::class, 'update'])->name('admin.digests.update');
     Route::get('digests/{digest}/confirm_delete', [Admin_DigestController::class, 'confirm_delete'])->name('admin.digests.confirm_delete');
-    Route::post('digests/{digest}/delete', [Admin_DigetController::class, 'destroy'])->name('admin.digests.delete');
+    Route::delete('digests/{digest}/delete', [Admin_DigestController::class, 'destroy'])->name('admin.digests.delete');
 
 
     // Minutes
-    Route::get('minutes', [Admin_DigestController::class, 'index'])->name('admin.minutes.index');
-    Route::get('minutes/create', [Admin_DigestController::class, 'create'])->name('admin.minutes.create');
-    Route::post('minutes/store', [Admin_DigestController::class, 'store'])->name('admin.minutes.store');
-    Route::get('minutes/{minute}/edit', [Admin_DigestController::class, 'edit'])->name('admin.minutes.edit');
-    Route::post('minutes/{minute}/update', [Admin_DigestController::class, 'update'])->name('admin.minutes.update');
-    Route::get('minutes/{minute}/confirm_delete', [Admin_DigestController::class, 'confirm_delete'])->name('admin.minutes.confirm_delete');
-    Route::post('minutes/{minute}/delete', [Admin_DigetController::class, 'destroy'])->name('admin.minutes.delete');
+    Route::get('minutes', [Admin_MinuteController::class, 'index'])->name('admin.minutes.index');
+    Route::get('minutes/create', [Admin_MinuteController::class, 'create'])->name('admin.minutes.create');
+    Route::post('minutes/store', [Admin_MinuteController::class, 'store'])->name('admin.minutes.store');
+    Route::get('minutes/{minute}/edit', [Admin_MinuteController::class, 'edit'])->name('admin.minutes.edit');
+    Route::post('minutes/{minute}/update', [Admin_MinuteController::class, 'update'])->name('admin.minutes.update');
+    Route::get('minutes/{minute}/confirm_delete', [Admin_MinuteController::class, 'confirm_delete'])->name('admin.minutes.confirm_delete');
+    Route::delete('minutes/{minute}/delete', [Admin_MinuteController::class, 'destroy'])->name('admin.minutes.delete');
+
+
+    Route::get('attendance/{meeting}/register', [Admin_AttendanceController::class, 'register'])->name('admin.attendance.register');
+    Route::post('attendance/{meeting}/store', [Admin_AttendanceController::class, 'store'])->name('admin.attendance.store');
+    Route::post('attendance/{attendance}/remove', [Admin_AttendanceController::class, 'remove'])->name('admin.attendance.store');
+
+
+    Route::get('notifications', [Admin_NotificationController::class, 'index'])->name('admin.notifications.index');
+    Route::get('notifications/create', [Admin_NotificationController::class, 'create'])->name('admin.notifications.create');
+    Route::post('notifications/send', [Admin_NotificationController::class, 'send'])->name('admin.notifications.send');
+    Route::get('notifications/send-completed', [Admin_NotificationController::class, 'send_completed'])->name('admin.notifications.send_completed');
 
 });
 

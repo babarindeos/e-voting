@@ -60,10 +60,10 @@
 
                             <div class="py-4 mx-[10%] md:mx-0">
                                     <div>
-                                            {{ $userprofile->department->ministry->name}} ({{ $userprofile->department->ministry->code}})
+                                            {{ $userprofile->department->college->name}} ({{ $userprofile->department->college->code}})
                                     </div>
                                     <div>
-                                            {{ $userprofile->department->department_name }} ({{ $userprofile->department->department_code}})
+                                            {{ $userprofile->department->name }} ({{ $userprofile->department->code}})
                                     </div>                            
                             </div>
 
