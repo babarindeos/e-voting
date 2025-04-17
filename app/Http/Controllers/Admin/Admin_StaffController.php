@@ -23,7 +23,7 @@ class Admin_StaffController extends Controller
         $staffs = Staff::orderBy('surname', 'asc')
                         ->orderBy('firstname', 'asc')
                         ->orderBy('middlename', 'asc')
-                        ->paginate(2);
+                        ->paginate(100);
         return view('admin.staff.index', compact('staffs'));
 
     }
@@ -110,7 +110,7 @@ class Admin_StaffController extends Controller
 
 
                             // send email
-                            $fullname = $formFields['surname'].' '.$formFields['firstname'];
+                            $fullname = $formFields['title'].' '.ucfirst(strtolower($formFields['surname'])).' '.$formFields['firstname'];
                             $username = $formFields['email'];
                             $recipient = $fullname;
                             $recipient_email = $formFields['email'];

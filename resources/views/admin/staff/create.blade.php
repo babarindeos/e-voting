@@ -54,6 +54,7 @@
                                                                     <option value=''>-- Select Title --</option>
                                                                             <option value="Prof.">Professor</option>
                                                                             <option value="Assoc. Prof.">Associate Professor</option>
+                                                                            <option value="Prof. (Mrs.)">Prof. (Mrs.)</option> 
                                                                             <option value="Dr.">Doctor</option> 
                                                                             <option value="Mr.">Mr.</option> 
                                                                             <option value="Mrs.">Mrs.</option> 

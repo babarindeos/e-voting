@@ -70,5 +70,10 @@ class User extends Authenticatable
         return $this->hasOne(AnnouncementPermissions::class, 'user_id', 'id');
     }
 
+    public function voter()
+    {
+        return $this->hasMany(VoterRegistration::class, 'user_id', 'id');
+    }
+
     
 }

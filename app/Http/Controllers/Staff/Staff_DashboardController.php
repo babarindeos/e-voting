@@ -8,6 +8,14 @@ use App\Models\Workflow;
 use App\Models\PrivateMessage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
+use App\Models\Digest;
+use App\Models\Paper;
+use App\Models\Meeting;
+use Illuminate\Support\Facades\DB;
+use App\Models\Announcement;
+use App\Models\Minute;
+use App\Models\Staff;
+use App\Models\Department;
 
 class Staff_DashboardController extends Controller
 {
@@ -31,22 +39,34 @@ class Staff_DashboardController extends Controller
         }
 
         // get notification
-        $workflow_notifications = Workflow::where('recipient_id', Auth::user()->id)
-                                            ->where('read', false)
-                                            ->orderBy('id', 'desc')->paginate(5);
 
-        $private_message_notifications = PrivateMessage::where('recipient_id', Auth::user()->id)
-                                                       ->where('read', false)
-                                                       ->orderBy('id', 'desc')->paginate(5);
 
-        $recent_workflows = Workflow::latest()->take(5)->get();      
+        $meeting_count = Meeting::count();
+        $staff_count = Staff::count();
+        $digest_count = Digest::count();
+        $paper_count = Paper::count();
+        $department_count = Department::count();
+        $minute_count = Minute::count();
+
+        $announcements = Announcement::orderBy('created_at', 'desc')->take(1)->get();
+
+        $meetings = Meeting::orderBy('created_at', 'desc')->take(1)->get();
+
+        $papers = Paper::orderBy('created_at', 'desc')->take(3)->get();
+
+        $minutes = Minute::orderBy('created_at', 'desc')->take(3)->get();
+
+        return view('staff.dashboard', compact('announcements', 'meetings', 'papers', 'minutes'))->with([
+            "meeting_count" => $meeting_count,
+            "digest_count" => $digest_count,
+            "staff_count" => $staff_count,
+            "paper_count" => $paper_count,
+            "department_count" => $department_count,
+            'minute_count' => $minute_count
+        ]);
         
-        $current_user =  Auth::user()->id;
-        //dd($current_user);
+       
 
-        $recent_workflows = Workflow::where('recipient_id','=', $current_user)->latest()->take(5)->get();
-        
-        return view('staff.dashboard', compact('workflow_notifications', 'recent_workflows', 'private_message_notifications'));
 
     }
 }

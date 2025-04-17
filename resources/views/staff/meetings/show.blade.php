@@ -6,17 +6,7 @@
                     Meeting            
                 </div>
 
-                <div>
-
-                            <a href="{{ route('admin.meetings.index') }}" class="border border-green-600 text-green-600 py-2 px-6 
-                                            rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">Meetings</a>
-                            
-                            <a href="{{ route('admin.meetings.index') }}" class="border border-green-600 text-green-600 py-2 px-6 
-                                            rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">Agenda</a>
-
-                            <a href="{{ route('admin.meetings.index') }}" class="border border-green-600 text-green-600 py-2 px-6 
-                                            rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">Attendance</a>
-                </div>
+                
                 
         </section>  
 
@@ -56,7 +46,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="flex items-center px-2">
-                                                        <a class="hover:underline" href="{{ route('staff.profile.email_user_profile',['email'=>$meeting->sender->email]) }}">
+                                                        <a class="hover:underline" href="#">
                                                                 @php
                                                                     $surname = ucfirst(strtolower($meeting->sender->surname))
                                                                 @endphp
@@ -196,7 +186,7 @@
                                                                                         {{ $agendum->title}}
                                                                                         <div>
                                                                                             @if ($agendum->paper_id !=null)
-                                                                                                        <a class='underline' target="_blank" href="{{ route('admin.papers.show',['paper'=>$agendum->paper_id]) }}">
+                                                                                                        <a class='underline' target="_blank" href="{{ route('staff.papers.show',['paper'=>$agendum->paper_id]) }}">
                                                                                                             {{ $agendum->paper->title}} ({{ $agendum->paper->paper_no }})
                                                                                                         </a>
                                                                                                         <span class='text-xs border px-2 rounded-md'>Paper</span>
@@ -264,7 +254,7 @@
 
 
                 <div class="flex flex-col md:border-l  md:w-[40%] md:px-3 py-2"><!-- Right pane //-->
-                    <form action="{{ route('admin.meetings.comments.store', ['meeting'=>$meeting->id]) }}" method="POST">
+                    <form action="{{ route('staff.meetings.comments.store', ['meeting'=>$meeting->id]) }}" method="POST">
                             @csrf
 
                             <div class="py-1">
@@ -337,9 +327,9 @@
                                                        {{ $comment->message }}
                                                 </div>
 
-                                                @if (Auth::user()->id == $meeting->user_id)
+                                                @if (Auth::user()->id == $comment->user_id)
                                                     <div class="text-xs text-end px-2 py-1">
-                                                        <form action="{{ route('admin.meetings.comments.delete_comment', ['comment'=>$comment->id]) }}" method="post">
+                                                        <form action="{{ route('staff.meetings.comments.delete_comment', ['comment'=>$comment->id]) }}" method="post">
                                                             @csrf
                                                             @method('delete')                                
                                                                 <button type="submit" class='border px-3 py-1 border-red-400 rounded-md 

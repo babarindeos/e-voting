@@ -15,7 +15,7 @@
                     <!-- end of logo //-->
                     <!-- Name //-->
                     <div class="flex flex-col item-center justify-center">
-                            <div class="text-white font-bold text-2xl font-serif">FUNAAB e-Senate</div>
+                            <div class="text-white font-bold text-2xl font-serif">FUNIEC Elections</div>
                             <div class="text-white font-semibold font-serif opacity-70">Federal University of Agriculture Abeokuta</div>
                                 
                     </div>
@@ -38,44 +38,49 @@
                            
                             <div class="relative group">
                                 <button class="text-white px-1 py-2 rounded-md font-semibold">
-                                    Meetings
+                                    Elections
+                                </button>
+                                <!-- Sub-menu -->
+                                <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[300%]">
+                                    <a href="{{ route('admin.election_types.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Election Types</a>
+                                    <a href="{{ route('admin.electoral_committees.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Electoral Committees</a>
+                                    <a href="{{ route('admin.election_suites.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Election Suites</a>
+                                    <a href="{{ route('admin.elections.index') }}" class="flex flex-row px-4 py-2 hover:bg-gray-200 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Elections</a>
+                                    <a href="{{ route('admin.election_registrations.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Registrations</a>
+                                </div>
+                            </div>
+
+                            <div class="relative group">
+                                <button class="text-white px-1 py-2 rounded-md font-semibold">
+                                    Positions
+                                </button>
+                                <!-- Sub-menu -->
+                                <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[300%]">
+                                    <a href="{{ route('admin.positions.create') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create Position</a>
+                                    <a href="{{ route('admin.positions.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Positions</a>
+                                </div>
+                            </div>
+
+
+                            
+
+                            <div class="relative group">
+                                <button class="text-white px-1 py-2 rounded-md font-semibold">
+                                    Voters
                                 </button>
                                 <!-- Sub-menu -->
                                 <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[350%]">
-                                    <a href="{{ route('admin.meetings.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Meetings</a>
-                                    <a href="{{ route('admin.meetings.create') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create Meeting</a>
-                                    <a href="{{ route('admin.notifications.index') }}" class="flex flex-row px-4 py-2 hover:bg-gray-200 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Meeting Notification</a>
-                                    <a href="" class="flex flex-row px-4 py-2 hover:bg-green-500 hover:text-white  hover:border-l-yellow-500 hover:border-l-4 pr-8">Meeting Reminder</a>
+                                    <a href="{{ route('admin.announcements.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Registered Voters</a>
                                 </div>
                             </div>
 
 
-                            <div class="relative group">
-                                <button class="text-white px-1 py-2 rounded-md font-semibold">
-                                    Documents
-                                </button>
-                                <!-- Sub-menu -->
-                                <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[260%]">
-                                    <a href="{{ route('admin.papers.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Papers</a>
-                                    <a href="{{ route('admin.digests.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Digests</a>
-                                    <a href="{{ route('admin.minutes.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Minutes</a>
-                                </div>
-                            </div>
+                            <a href='{{ route('admin.dashboard.index') }}' class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-2 ">Live</a>
+
 
                             <div class="relative group">
                                 <button class="text-white px-1 py-2 rounded-md font-semibold">
-                                    Announcements
-                                </button>
-                                <!-- Sub-menu -->
-                                <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[200%]">
-                                    <a href="{{ route('admin.announcements.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Announcements</a>
-                                    <a href="{{ route('admin.announcements.create') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create Announcement</a>
-                                </div>
-                            </div>
-
-                            <div class="relative group">
-                                <button class="text-white px-1 py-2 rounded-md font-semibold">
-                                    Users
+                                   Results
                                 </button>
                                 <!-- Sub-menu -->
                                 <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[350%]">
@@ -87,7 +92,7 @@
                             
                             <div class="relative group">
                                 <button class="text-white px-1 py-2 rounded-md font-semibold">
-                                    Settings
+                                    Analytics
                                 </button>
                                 <!-- Sub-menu -->
                                 <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[280%]">

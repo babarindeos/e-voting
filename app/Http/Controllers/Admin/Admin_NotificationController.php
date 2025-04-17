@@ -11,6 +11,11 @@ use App\mail\UserNotificationMail;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 
+use App\Jobs\sendMeetingNotice;
+use App\Jobs\SendUserMailJob;
+
+
+
 class Admin_NotificationController extends Controller
 {
     //
@@ -48,7 +53,14 @@ class Admin_NotificationController extends Controller
 
         foreach($users as $user)
         {   
-            $fullname = $user->surname.' '.$user->firstname;
+            $title = '';
+
+            if ($user->staff != null)
+            {
+                $title = $user->staff->title;
+            }
+            
+            $fullname = $title.' '.$user->surname.' '.$user->firstname;
             $mailData = [
                 'name' => $fullname,
                 'subject' => $request->subject,
@@ -59,8 +71,10 @@ class Admin_NotificationController extends Controller
                 'meeting_time' => $meeting_time,                
             ];            
             
-            //sendUserMailJob::dispatch($user, $mailData)->onQueue('emails');
-            Mail::to($user->email)->send(new UserNotificationMail($mailData));            
+            sendUserMailJob::dispatch($user, $mailData)->onQueue('emails');
+            Mail::to($user->email)->send(new UserNotificationMail($mailData));   
+           
+           //$to = $user->email
         }
 
         $formFields['meeting_id'] = $request->meeting;

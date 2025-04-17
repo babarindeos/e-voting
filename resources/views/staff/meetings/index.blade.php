@@ -4,7 +4,7 @@
         
 
         <!-- page header //-->
-        <section class="flex flex-col w-full md:w-full py-8 px-2 md:px-4 border-0 border-red-900 mx-auto border border-1">
+        <section class="flex flex-col w-full md:w-full py-4 mt-2 px-2 md:px-4 border-0 border-red-900 mx-auto border border-1">
         
             <div class="flex border-b border-gray-300 py-2 justify-between">
                     <div>
@@ -22,7 +22,7 @@
         
 
         
-        <section class="flex flex-col w-[98%] mx-auto py-2 mt-2 border-0">
+        <section class="flex flex-col w-[98%] mx-auto py-2 mt-0 border-0">
                    
 
 

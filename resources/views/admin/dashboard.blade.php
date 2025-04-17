@@ -24,7 +24,7 @@
                             {{ number_format($meeting_count)}}
                         </div>
                         <div class="text-sm text-white font-normal text-end">
-                            Meetings
+                            Election Suites
                         </div>
                     </div>
 
@@ -34,7 +34,7 @@
                             {{ $paper_count}}
                         </div>
                         <div class="text-sm text-white font-normal text-end">
-                            Papers
+                            Elections
                         </div>
                     </div>
 
@@ -45,7 +45,7 @@
                             {{ $digest_count}}
                         </div>
                         <div class="text-sm text-white font-normal text-end">
-                            Digests
+                            Positions
                         </div>
                     </div>
 
@@ -56,7 +56,7 @@
                             {{ $staff_count}}
                         </div>
                         <div class="text-sm text-white  text-end">
-                            Staff
+                            Candidates
                         </div>
                     </div>
 
@@ -66,7 +66,7 @@
                             {{ $department_count}}
                         </div>
                         <div class="text-sm text-white text-end">
-                            Departments
+                            Committees
                         </div>
                     </div>
 
@@ -82,7 +82,7 @@
 
             <!-- Announcements //-->
             <div class="flex flex-col w-full md:w-1/2 rounded-md border px-4 py-4 ">
-                <div class='py-2 border-b w-full font-bold text-xl'>Recent Announcements</div>
+                <div class='py-2 border-b w-full font-bold text-xl'>Election Suites</div>
 
                 <div class='py-1'>
                         @foreach($announcements as $announcement)
@@ -99,7 +99,7 @@
             </div><!-- end of Announcements //-->
 
             <div class="flex flex-col w-full md:w-1/2 rounded-md border px-4 py-4">
-                    <div class='py-2 border-b w-full font-bold text-xl'>Latest Meetings</div>
+                    <div class='py-2 border-b w-full font-bold text-xl'>Elections</div>
 
                     <div class='py-1'>
                             @foreach($meetings as $meeting)
@@ -127,7 +127,7 @@
 
             <!-- Announcements //-->
             <div class="flex flex-col w-full md:w-1/2 rounded-md border px-4 py-4 ">
-                <div class='py-2 border-b w-full font-bold text-xl'>Recent Papers</div>
+                <div class='py-2 border-b w-full font-bold text-xl'>Positions</div>
 
                 <div class='py-1'>
                         @foreach($papers as $paper)
@@ -144,7 +144,7 @@
             </div><!-- end of Announcements //-->
 
             <div class="flex flex-col w-full md:w-1/2 rounded-md border px-4 py-4">
-                    <div class='py-2 border-b w-full font-bold text-xl'>Latest Minutes</div>
+                    <div class='py-2 border-b w-full font-bold text-xl'>Candidates</div>
 
                     <div class='py-1'>
                             @foreach($minutes as $minute)

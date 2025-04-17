@@ -14,7 +14,7 @@
                     <!-- end of logo //-->
                     <!-- Name //-->
                     <div class="flex flex-col item-center justify-center">
-                            <div class="text-white font-bold text-2xl font-serif">FUNAAB e-Senate</div>
+                            <div class="text-white font-bold text-2xl font-serif">FUNIEC Elections</div>
                             <div class="text-white font-semibold font-serif text-sm opacity-75">Federal University of Agriculture Abeokuta</div>
                                 
                     </div>
@@ -34,14 +34,17 @@
 
                             <a href="{{ route('staff.dashboard.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-2 ">Dashboard</a>
 
-                                       
+                            
+                            
                             <a  href="{{ route('staff.meetings.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-3 ">Meetings</a>
                             
-                            <a  href="{{ route('staff.document.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-3 ">Papers</a>
+                            <a  href="{{ route('staff.announcements.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-3 ">Announcements</a>
 
-                            <a  href="{{ route('staff.document.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-3 ">Minutes</a>
+                            <a  href="{{ route('staff.papers.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-3 ">Papers</a>
 
-                            <a  href="{{ route('staff.document.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-3 ">Digests</a>
+                            <a  href="{{ route('staff.minutes.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-3 ">Minutes</a>
+
+                            <a  href="{{ route('staff.digests.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-3 ">Digests</a>
                             
                             <div class="relative group flex">
                                 <button class="text-white px-1 py-2 rounded-md font-semibold flex items-center">

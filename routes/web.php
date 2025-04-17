@@ -53,6 +53,22 @@ use App\Http\Controllers\Admin\Admin_MinuteController;
 use App\Http\Controllers\Admin\Admin_AttendanceController;
 use App\Http\Controllers\Admin\Admin_NotificationController;
 
+use App\Http\Controllers\Admin\Admin_ElectionTypeController;
+
+use App\Http\Controllers\Admin\Admin_ElectoralCommitteeController;
+use App\Http\Controllers\Admin\Admin_ElectoralCommitteePositionController;
+use App\Http\Controllers\Admin\Admin_ElectoralCommitteeMemberController;
+
+use App\Http\Controllers\Admin\Admin_ElectionSuiteController;
+
+
+use App\Http\Controllers\Admin\Admin_ElectionController;
+
+use App\Http\Controllers\Admin\Admin_ElectionRegistrationController;
+use App\Http\Controllers\Admin\Admin_PositionController;
+use App\Http\Controllers\Admin\Admin_CandidateController;
+use App\Http\Controllers\Admin\Admin_VoterRegistrationController;
+
 
 
 use App\Http\Controllers\Staff\Staff_AuthController;
@@ -75,7 +91,24 @@ use App\Http\Controllers\Staff\Staff_CircleAnnouncementController;
 use App\Http\Controllers\Staff\Staff_CategoryController;
 use App\Http\Controllers\Staff\Staff_MeetingController;
 
+use App\Http\Controllers\Staff\Staff_PaperController;
+use App\Http\Controllers\Staff\Staff_DigestController;
+use App\Http\Controllers\Staff\Staff_MinuteController;
+use App\Http\Controllers\Staff\Staff_AnnouncementController;
+
+use App\Http\Controllers\Staff\Staff_MeetingCommentController;
+use App\Http\Controllers\Staff\Staff_PaperCommentController;
+
+
+use App\Http\Controllers\Student\Student_DashboardController;
+
+
+
 use App\Http\Controllers\MailTestController;
+
+use App\Http\Controllers\VotingCenterController;
+use App\Http\Controllers\Student\Student_VoteController;
+
 
 
 /*
@@ -162,12 +195,27 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+
+Route::get('/voting_center', [VotingCenterController::class, 'index'])->name('guest.voting_center.index');
+Route::post('/voting_center', [VotingCenterController::class, 'login'])->name('guest.voting_center.login');
+
 Route::post('/', [Staff_AuthController::class, 'login'])->name('staff.auth.login');
 
 
 
 Route::get('/admin', [Admin_AuthController::class, 'index'])->name('admin.auth.index');
 Route::post('/admin', [Admin_AuthController::class, 'login'])->name('admin.auth.login');
+
+
+
+Route::prefix('student')->middleware(['auth', 'student'])->group(function(){
+    Route::get('/dashboard', [Student_DashboardController::class, 'index'])->name('student.dashboard.index');
+    
+    // Voting
+    Route::post('elections/start_voting', [Student_VoteController::class, 'start_voting'])->name('student.elections.start_voting');
+
+    Route::get('/elections/vote', [Student_VoteController::class, 'vote'])->name('student.elections.vote');
+});
 
 
 Route::prefix('staff')->middleware(['auth', 'staff'])->group(function(){
@@ -254,8 +302,27 @@ Route::prefix('staff')->middleware(['auth', 'staff'])->group(function(){
     Route::get('meetings', [Staff_MeetingController::class, 'index'])->name('staff.meetings.index');
     Route::get('meetings/{meeting}/show', [Staff_MeetingController::class, 'show'])->name('staff.meetings.show');
     Route::post('meetings/{meeting}/comments/store', [Staff_MeetingCommentController::class, 'store'])->name('staff.meetings.comments.store');
-    
+    Route::delete('meetings/{comment}/comments/delete', [Staff_MeetingCommentController::class, 'destroy'])->name('staff.meetings.comments.delete_comment');
 
+
+    // Paper
+    Route::get('papers', [Staff_PaperController::class, 'index'])->name('staff.papers.index');
+    Route::get('papers/{paper}/show', [Staff_PaperController::class, 'show'])->name('staff.papers.show');
+    Route::post('papers/{paper}/comments/store', [Staff_PaperCommentController::class, 'store'])->name('staff.papers.comments.store');
+    Route::delete('papers/{comment}/comments/delete', [Admin_PaperCommentController::class, 'destroy'])->name('staff.meetings.papers.delete_comment');
+    
+    // Minutes
+    Route::get('minutes', [Staff_MinuteController::class, 'index'])->name('staff.minutes.index');
+
+    // Digests
+    Route::get('digests', [Staff_DigestController::class, 'index'])->name('staff.digests.index');
+
+    // Create Announcement
+    Route::get('announcements', [Staff_AnnouncementController::class, 'index'])->name('staff.announcements.index');
+    Route::get('announcements/{announcement}/show', [Staff_AnnouncementController::class, 'show'])->name('staff.announcements.show');
+
+    Route::post('announcements/{announcement}/comments/store', [Staff_AnnouncementController::class, 'store_comment'])->name('staff.announcements.comments.store');
+    Route::delete('announcements/{comment}/comments/delete', [Staff_AnnouncementController::class, 'delete_comment'])->name('staff.announcements.comments.delete_comment');
 
 });
 
@@ -560,6 +627,112 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
     Route::get('notifications/create', [Admin_NotificationController::class, 'create'])->name('admin.notifications.create');
     Route::post('notifications/send', [Admin_NotificationController::class, 'send'])->name('admin.notifications.send');
     Route::get('notifications/send-completed', [Admin_NotificationController::class, 'send_completed'])->name('admin.notifications.send_completed');
+
+
+    // ELection Types
+    Route::get('election_types', [Admin_ElectionTypeController::class, 'index'])->name('admin.election_types.index');
+    Route::get('election_types/create', [Admin_ElectionTypeController::class, 'create'])->name('admin.election_types.create');
+    Route::post('election_types/store', [Admin_ElectionTypeController::class, 'store'])->name('admin.election_types.store');
+    Route::get('election_types/{election_type}/edit', [Admin_ElectionTypeController::class, 'edit'])->name('admin.election_types.edit');
+    Route::post('election_types/{election_type}/update', [Admin_ElectionTypeController::class, 'update'])->name('admin.election_types.update');
+    Route::get('election_types/{election_type}/confirm_delete', [Admin_ElectionTypeController::class, 'confirm_delete'])->name('admin.election_types.confirm_delete');
+    Route::delete('election_types/{election_type}/delete', [Admin_ElectionTypeController::class, 'destroy'])->name('admin.election_types.delete');
+
+
+
+    // Electoral Committee
+    Route::get('electoral_committees', [Admin_ElectoralCommitteeController::class, 'index'])->name('admin.electoral_committees.index');
+    Route::get('electoral_committees/create',  [Admin_ElectoralCommitteeController::class, 'create'])->name('admin.electoral_committees.create');
+    Route::post('electoral_committees/store', [Admin_ElectoralCommitteeController::class, 'store'])->name('admin.electoral_committees.store');
+    Route::get('electoral_committees/{electoral_committee}/show', [Admin_ElectoralCommitteeController::class, 'show'])->name('admin.electoral_committees.show');
+    Route::get('electoral_committees/{electoral_committee}/edit', [Admin_ElectoralCommitteeController::class, 'edit'])->name('admin.electoral_committees.edit');
+    Route::post('electoral_committees/{electoral_committee}/update', [Admin_ElectoralCommitteeController::class, 'update'])->name('admin.electoral_committees.update');
+    Route::get('electoral_committees/{electoral_committee}/confirm_delete', [Admin_ElectoralCommitteeController::class, 'confirm_delete'])->name('admin.electoral_committees.confirm_delete');
+    Route::delete('electoral_committees/{electoral_committee}/delete', [Admin_ElectoralCommitteeController::class, 'destroy'])->name('admin.electoral_committees.delete');
+
+
+    // Electoral Committee Position
+    Route::get('electoral_committees/positions', [Admin_ElectoralCommitteePositionController::class, 'index'])->name('admin.electoral_committees.positions.index');
+    Route::get('electoral_committees/positions/create',  [Admin_ElectoralCommitteePositionController::class, 'create'])->name('admin.electoral_committees.positions.create');
+    Route::post('electoral_committees/positions/store', [Admin_ElectoralCommitteePositionController::class, 'store'])->name('admin.electoral_committees.positions.store');
+    Route::get('electoral_committees/positions/{position}/show', [Admin_ElectoralCommitteePositionController::class, 'show'])->name('admin.electoral_committees.positions.show');
+    Route::get('electoral_committees/positions/{position}/edit', [Admin_ElectoralCommitteePositionController::class, 'edit'])->name('admin.electoral_committees.positions.edit');
+    Route::post('electoral_committees/positions/{position}/update', [Admin_ElectoralCommitteePositionController::class, 'update'])->name('admin.electoral_committees.positions.update');
+    Route::get('electoral_committees/positions/{position}/confirm_delete', [Admin_ElectoralCommitteePositionController::class, 'confirm_delete'])->name('admin.electoral_committees.positions.confirm_delete');
+    Route::delete('electoral_committees/positions/{position}/delete', [Admin_ElectoralCommitteePositionController::class, 'destroy'])->name('admin.electoral_committees.positions.delete');
+
+
+
+    // Electoral Committee Members
+    Route::get('electoral_committees/members', [Admin_ElectoralCommitteeMemberController::class, 'index'])->name('admin.electoral_committees.members.index');
+    Route::get('electoral_committees/members/{electoral_committee}/create',  [Admin_ElectoralCommitteeMemberController::class, 'create'])->name('admin.electoral_committees.members.create');
+    Route::post('electoral_committees/members/{electoral_committee}/store', [Admin_ElectoralCommitteeMemberController::class, 'store'])->name('admin.electoral_committees.members.store');
+    Route::get('electoral_committees/members/{member}/show', [Admin_ElectoralCommitteeMemberController::class, 'show'])->name('admin.electoral_committees.members.show');
+    Route::get('electoral_committees/members/{member}/edit', [Admin_ElectoralCommitteeMemberController::class, 'edit'])->name('admin.electoral_committees.members.edit');
+    Route::post('electoral_committees/members/{member}/update', [Admin_ElectoralCommitteeMemberController::class, 'update'])->name('admin.electoral_committees.members.update');
+    Route::get('electoral_committees/members/{member}/confirm_delete', [Admin_ElectoralCommitteeMemberController::class, 'confirm_delete'])->name('admin.electoral_committees.members.confirm_delete');
+    Route::delete('electoral_committees/members/{member}/delete', [Admin_ElectoralCommitteeMemberController::class, 'destroy'])->name('admin.electoral_committees.members.delete');
+
+
+
+    // Election Suite
+    Route::get('election_suites', [Admin_ElectionSuiteController::class, 'index'])->name('admin.election_suites.index');
+    Route::get('election_suites/create', [Admin_ElectionSuiteController::class, 'create'])->name('admin.election_suites.create');
+    Route::post('election_suites/store', [Admin_ElectionSuiteController::class, 'store'])->name('admin.election_suites.store');
+    Route::get('election_suites/{election_suite}/show', [Admin_ElectionSuiteController::class, 'show'])->name('admin.election_suites.show');
+    Route::get('election_suites/{election_suite}/edit', [Admin_ElectionSuiteController::class, 'edit'])->name('admin.election_suites.edit');
+    Route::post('election_suites/{election_suite}/update', [Admin_ElectionSuiteController::class, 'update'])->name('admin.election_suites.update');
+    Route::get('election_suites/{election_suite}/confirm_delete', [Admin_ElectionSuiteController::class, 'confirm_delete'])->name('admin.election_suites.confirm_delete');
+    Route::delete('election_suites/{election_suite}/delete', [Admin_ElectionSuiteController::class, 'destroy'])->name('admin.election_suites.delete');
+
+
+    // Elections
+    Route::get('elections', [Admin_ElectionController::class, 'index'])->name('admin.elections.index');
+    Route::get('elections/create', [Admin_ElectionController::class, 'create'])->name('admin.elections.create');
+    Route::post('elections/store', [Admin_ElectionController::class, 'store'])->name('admin.elections.store');
+    Route::get('elections/{election}/show', [Admin_ElectionController::class, 'show'])->name('admin.elections.show');
+    Route::get('elections/{election}/edit', [Admin_ElectionController::class, 'edit'])->name('admin.elections.edit');
+    Route::post('elections/{election}/update', [Admin_ElectionController::class, 'update'])->name('admin.elections.update');
+    Route::get('elections/{election}/confirm_delete', [Admin_ElectionController::class, 'confirm_delete'])->name('admin.elections.confirm_delete');
+    Route::delete('elections/{election}/delete', [Admin_ElectionController::class, 'destroy'])->name('admin.elections.delete');
+
+
+    // Election Registrations
+    Route::get('election_registrations', [Admin_ElectionRegistrationController::class, 'index'])->name('admin.election_registrations.index');
+    Route::get('election_registrations/create', [Admin_ElectionRegistrationController::class, 'create'])->name('admin.election_registrations.create');
+    Route::post('election_registrations/store', [Admin_ElectionRegistrationController::class, 'store'])->name('admin.election_registrations.store');
+    Route::get('election_registrations/{election_registration}/show', [Admin_ElectionRegistrationController::class, 'show'])->name('admin.election_registrations.show');
+    Route::get('election_registrations/{election_registration}/edit', [Admin_ElectionRegistrationController::class, 'edit'])->name('admin.election_registrations.edit');
+    Route::post('election_registrations/{election_registration}/update', [Admin_ElectionRegistrationController::class, 'update'])->name('admin.election_registrations.update');
+    Route::get('election_registrations/{election_registration}/confirm_delete', [Admin_ElectionRegistrationController::class, 'confirm_delete'])->name('admin.election_registrations.confirm_delete');
+    Route::delete('election_registrations/{election_registration}/delete', [Admin_ElectionRegistrationController::class, 'destroy'])->name('admin.election_registrations.delete');
+
+
+
+    // Positions
+    Route::get('positions', [Admin_PositionController::class, 'index'])->name('admin.positions.index');
+    Route::get('positions/create', [Admin_PositionController::class, 'create'])->name('admin.positions.create');
+    Route::post('positions/store', [Admin_PositionController::class, 'store'])->name('admin.positions.store');
+    Route::get('positions/{position}/show', [Admin_PositionController::class, 'show'])->name('admin.positions.show');
+    Route::get('positions/{position}/edit', [Admin_PositionController::class, 'edit'])->name('admin.positions.edit');
+    Route::post('positions/{position}/update', [Admin_PositionController::class, 'update'])->name('admin.positions.update');
+    Route::get('positions/{position}/confirm_delete', [Admin_PositionController::class, 'confirm_delete'])->name('admin.positions.confirm_delete');
+    Route::delete('positions/{position}/delete', [Admin_PositionController::class, 'destroy'])->name('admin.positions.delete');
+
+
+    // Candidates
+    Route::get('elections/{election}/candidates', [Admin_CandidateController::class, 'index'])->name('admin.elections.candidates.index');
+    Route::get('elections/{election}/candidates/create', [Admin_CandidateController::class, 'create'])->name('admin.elections.candidates.create');
+    Route::post('elections/{election}/candidates/store', [Admin_CandidateController::class, 'store'])->name('admin.elections.candidates.store');
+    Route::get('elections/candidates/{candidate}/show', [Admin_CandidateController::class, 'show'])->name('admin.elections.candidates.show');
+    Route::get('elections/candidates/{candidate}/edit', [Admin_CandidateController::class, 'edit'])->name('admin.elections.candidates.edit');
+    Route::post('elections/candidates/{candidate}/update', [Admin_CandidateController::class, 'update'])->name('admin.elections.candidates.update');
+    Route::get('elections/candidates/{candidate}/confirm_delete', [Admin_CandidateController::class, 'confirm_delete'])->name('admin.elections.candidates.confirm_delete');
+    Route::delete('elections/candidates/{candidate}/delete', [Admin_CandidateController::class, 'destroy'])->name('admin.elections.candidates.delete');
+
+
+    
+
 
 });
 

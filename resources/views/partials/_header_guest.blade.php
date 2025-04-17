@@ -11,7 +11,7 @@
             <!-- end of logo //-->
             <!-- Name //-->
             <div class="flex flex-col item-center justify-center">
-                    <div class="text-white font-bold text-2xl font-serif">FUNAAB e-Senate</div>
+                    <div class="text-white font-bold text-2xl font-serif">FUNIEC Elections</div>
                     <div class="text-white font-semibold font-serif opacity-70">Federal University of Agriculture Abeokuta</div>
             </div>
             <!-- end of name //-->

@@ -337,7 +337,7 @@
                                                        {{ $comment->message }}
                                                 </div>
 
-                                                @if (Auth::user()->id == $meeting->user_id)
+                                                @if (Auth::user()->id == $comment->user_id)
                                                     <div class="text-xs text-end px-2 py-1">
                                                         <form action="{{ route('admin.meetings.comments.delete_comment', ['comment'=>$comment->id]) }}" method="post">
                                                             @csrf
