@@ -215,6 +215,14 @@ Route::prefix('student')->middleware(['auth', 'student'])->group(function(){
     Route::post('elections/start_voting', [Student_VoteController::class, 'start_voting'])->name('student.elections.start_voting');
 
     Route::get('/elections/vote', [Student_VoteController::class, 'vote'])->name('student.elections.vote');
+    Route::post('/elections/vote', [Student_VoteController::class,  'cast_vote'])->name('student.elections.cast_vote');
+
+    Route::post('/elections/previous', [Student_VoteController::class, 'previous'])->name('student.elections.vote.previous');
+    Route::post('/elections/next', [Student_VoteController::class, 'next'])->name('student.elections.vote.next');
+    Route::post('/elections/preview', [Student_VoteController::class, 'preview'])->name('student.elections.vote.preview');
+
+
+    
 });
 
 
