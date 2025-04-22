@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->string('name')->unique();
+            $table->unsignedBigInteger('electoral_committee_id')->nullable();
+            $table->foreign('electoral_committee_id')->references('id')->on('electoral_committees')->onDelete('cascade');
             $table->text('description');
             $table->timestamps();
         });

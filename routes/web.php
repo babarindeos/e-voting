@@ -109,6 +109,8 @@ use App\Http\Controllers\MailTestController;
 use App\Http\Controllers\VotingCenterController;
 use App\Http\Controllers\Student\Student_VoteController;
 
+use App\Http\Controllers\WelcomeController;
+
 
 
 /*
@@ -191,9 +193,9 @@ Route::get('queueMail', [MailTestController::class, 'QueueMailer']);
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
+
 
 
 Route::get('/voting_center', [VotingCenterController::class, 'index'])->name('guest.voting_center.index');
@@ -205,6 +207,13 @@ Route::post('/', [Staff_AuthController::class, 'login'])->name('staff.auth.login
 
 Route::get('/admin', [Admin_AuthController::class, 'index'])->name('admin.auth.index');
 Route::post('/admin', [Admin_AuthController::class, 'login'])->name('admin.auth.login');
+
+
+Route::get('/{candidate_alias}', [WelcomeController::class, 'candidate_alias'])->name('guest.candidate.alias');
+
+
+
+Route::get('elections/{election}/voting_completed', [Student_VoteController::class, 'voting_completed'])->name('student.elections.vote.voting_completed');
 
 
 
@@ -219,9 +228,11 @@ Route::prefix('student')->middleware(['auth', 'student'])->group(function(){
 
     Route::post('/elections/previous', [Student_VoteController::class, 'previous'])->name('student.elections.vote.previous');
     Route::post('/elections/next', [Student_VoteController::class, 'next'])->name('student.elections.vote.next');
-    Route::post('/elections/preview', [Student_VoteController::class, 'preview'])->name('student.elections.vote.preview');
+    Route::get('/elections/{election}/preview', [Student_VoteController::class, 'preview'])->name('student.elections.vote.preview');
 
+    Route::post('/elections/finalize_voting', [Student_VoteController::class, 'finalize_voting'])->name('student.elections.vote.finalize_voting');
 
+    
     
 });
 

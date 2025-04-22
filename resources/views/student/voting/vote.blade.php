@@ -34,7 +34,7 @@
                                                         rounded-lg text-md md:text-lg hover:bg-green-500 hover:text-white hover:border-green-500">Next &raquo;</button>
                                             </form>
                                     @else
-                                            <form action="{{ route('student.elections.vote.preview') }}" method="post">
+                                            <form action="{{ route('student.elections.vote.preview', ['election' => $election->uuid]) }}" method="get">
                                                     @csrf
                                                     <button class="border border-green-600 text-green-600 py-2 px-6 
                                                     rounded-lg text-md md:text-lg hover:bg-green-500 hover:text-white hover:border-green-500">Preview Vote Cast &raquo;</button>
@@ -73,6 +73,7 @@
                                         <div class="flex flex-col  md:flex-row md:flex-wrap mx-auto w-[90%]">
                                                 @foreach($candidates as $candidate)
                                                     <div class='border w-full md:w-[30%] py-4 px-4'>
+                                                            
                                                             <div class='flex flex-col border rounded-md '>
                                                                 @if ($candidate->photo==null)
                                                                     <img src="{{ asset('images/avatar_150.jpg')}}" class="w-74 h-64"  />
@@ -237,7 +238,7 @@
                                 
 
 
-                                        <div class="flex flex-col  md:flex-row md:flex-wrap mx-auto w-[90%]">
+                                        <div class="flex flex-col  md:flex-row md:flex-wrap mx-auto w-[90%] mt-8">
                                                 <div class="flex flex-col border-red-900 w-[100%] md:w-[60%] mt-4 border-0 mx-auto">
                                                     <button type="submit" class="border border-1 bg-gray-400 py-4 text-white 
                                                                 hover:bg-green-500 font-semibold

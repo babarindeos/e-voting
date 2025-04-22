@@ -6,7 +6,9 @@
         <div class="flex">
             <!-- logo //-->
             <div class="flex flex-row px-2 md:px-4 py-2">
-                <img src="{{ asset('images/logo.png')}}" />
+                <a href="{{ route('welcome') }}" >
+                    <img src="{{ asset('images/logo.png')}}" />
+                </a>
             </div>
             <!-- end of logo //-->
             <!-- Name //-->

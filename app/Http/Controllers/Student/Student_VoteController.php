@@ -13,6 +13,7 @@ use App\Models\Vote;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\VoterRegistration;
+use App\Models\FinalizedVote;
 
 use Illuminate\Support\Str;
 
@@ -84,6 +85,11 @@ class Student_VoteController extends Controller
 
     public function previous()
     {
+        if (!Session::has('current_election'))
+        {
+            return redirect()->route('student.dashboard.index');
+        }
+
         $current_page = Session::get('current_page');
 
         if ($current_page != 0)
@@ -97,6 +103,12 @@ class Student_VoteController extends Controller
 
     public function next()
     {
+
+        if (!Session::has('current_election'))
+        {
+            return redirect()->route('student.dashboard.index');
+        }
+
         $current_page = Session::get('current_page');
 
 
@@ -127,6 +139,11 @@ class Student_VoteController extends Controller
 
     public function handleVote()
     {
+        if (!Session::has('current_election'))
+        {
+            return redirect()->route('student.dashboard.index');
+        }
+
         $current_election = Session::get('current_election');
 
         $position_nav = Session::get('position_nav');
@@ -166,7 +183,10 @@ class Student_VoteController extends Controller
 
     public function cast_vote(Request $request)
     {
-       
+        if (!Session::has('current_election'))
+        {
+            return redirect()->route('student.dashboard.index');
+        }
         
 
         $request->validate([
@@ -270,5 +290,104 @@ class Student_VoteController extends Controller
         }
 
         return $this->handleVote();
+    }
+
+    public function preview()
+    {
+        if (!Session::has('current_election'))
+        {
+            return redirect()->route('student.dashboard.index');
+        }
+        
+        // get the current election
+
+        $current_election = Session::get('current_election');
+        $current_election_id = $current_election->id;
+        
+
+        // get the current position
+        $position_nav = Session::get('position_nav');
+        $current_page = Session::get('current_page');
+        $position_id = $position_nav[$current_page];
+        $position = Position::where('id', $position_id)->first();
+
+         
+
+        // get the current registered voter
+        $current_voter = Session::get('current_voter');
+
+        // total pages
+        $total_pages = Session::get('total_pages');
+
+        
+
+
+        // determine if vote has already been cast for the election, position by the voter
+        $votes_cast = Vote::where('election_id', $current_election->id)
+                         ->where('voter_id', $current_voter->id)
+                         ->get();
+
+    
+        return view('student.voting.preview', compact('current_page', 'total_pages','votes_cast', 'position'))->with(['election' => $current_election]);
+        
+    }
+
+
+    public function finalize_voting(Request $request)
+    {
+        if (!Session::has('current_election'))
+        {
+            
+            return redirect()->route('guest.voting_center.index');
+        }
+
+        $uuid = Str::orderedUuid();
+
+        $current_election = Session::get('current_election');
+        $current_voter = Session::get('current_voter');
+        
+
+        // check if finalized voting has been recorded for this user
+        $finalized_voting = FinalizedVote::where('election_id', $current_election->id)
+                                          ->where('voter_id', $current_voter->id)
+                                          ->first();
+        
+        if ($finalized_voting == null)
+        {
+                    $formFields = [
+                        'uuid' => $uuid,
+                        'election_id' => $current_election->id,
+                        'voter_id' => $current_voter->id
+                    ];
+            
+                    FinalizedVote::create($formFields);
+        }     
+
+
+        Session::forget('current_election');
+        Session::forget('total_pages');
+        Session::forget('current_page');
+        Session::forget('position_nav');
+        Session::forget('current_voter');
+        Session::flush();
+
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('student.elections.vote.voting_completed', ['election' => $current_election->uuid])->withHeaders([
+                            'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+                        ]);
+    }
+
+    public function voting_completed(Request $request, $election)
+    {
+        
+
+         
+         
+
+         return view('guests.voting_center.voting_completed');
     }
 }
