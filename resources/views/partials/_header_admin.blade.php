@@ -59,35 +59,28 @@
                                     <a href="{{ route('admin.positions.create') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create Position</a>
                                     <a href="{{ route('admin.positions.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Positions</a>
                                 </div>
+                            </div>  
+                            
+                            
+                            <div class="relative group">
+                                <button class="text-white px-1 py-2 rounded-md font-semibold">
+                                    Halls
+                                </button>
+                                <!-- Sub-menu -->
+                                <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[450%]">
+                                    <a href="{{ route('admin.positions.create') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create Hall</a>
+                                    <a href="{{ route('admin.positions.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Halls</a>
+                                </div>
                             </div>
-
 
                             
 
-                            <div class="relative group">
-                                <button class="text-white px-1 py-2 rounded-md font-semibold">
-                                    Voters
-                                </button>
-                                <!-- Sub-menu -->
-                                <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[350%]">
-                                    <a href="{{ route('admin.announcements.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Registered Voters</a>
-                                </div>
-                            </div>
+
+                            <a href="{{ route('admin.dashboard.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-2 ">Live</a>
 
 
-                            <a href='{{ route('admin.dashboard.index') }}' class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-2 ">Live</a>
-
-
-                            <div class="relative group">
-                                <button class="text-white px-1 py-2 rounded-md font-semibold">
-                                   Results
-                                </button>
-                                <!-- Sub-menu -->
-                                <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[350%]">
-                                    <a href="{{ route('admin.staff.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Users</a>
-                                    <a href="{{ route('admin.staff.create') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create User</a>
-                                </div>
-                            </div>
+                            <a href="{{ route('admin.dashboard.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-2 ">Results</a>
+                            
                             
                             
                             <div class="relative group">
@@ -96,8 +89,8 @@
                                 </button>
                                 <!-- Sub-menu -->
                                 <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[280%]">
-                                    <a href="{{ route('admin.colleges.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white  hover:border-l-yellow-500 hover:border-l-4 pr-8">Colleges</a>
-                                    <a href="{{ route('admin.departments.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Departments</a>
+                                    <a href="#" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white  hover:border-l-yellow-500 hover:border-l-4 pr-8">Voters</a>
+                                    <a href="#" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Elections</a>
                                 </div>
                             </div>
                             <form action="{{ route('admin.auth.logout') }}" method="POST" class="flex items-center justify-center border-0">

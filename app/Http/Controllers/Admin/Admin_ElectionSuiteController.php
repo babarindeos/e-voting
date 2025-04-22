@@ -123,6 +123,18 @@ class Admin_ElectionSuiteController extends Controller
     }
 
 
+    public function show(ElectionSuite $election_suite)
+    {
+        return view('admin.election_suites.show', compact('election_suite'));
+    }
+
+
+    public function registered_voters(ElectionSuite $election_suite)
+    {
+            return view('admin.election_suites.registered_voters', compact('election_suite'));
+
+    }
+
     public function confirm_delete(ElectionSuite $election_suite)
     {
         return view('admin.election_suites.confirm_delete', compact('election_suite'));

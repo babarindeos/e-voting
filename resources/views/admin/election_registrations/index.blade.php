@@ -56,7 +56,7 @@
                                     
                                     <div>
                                         
-                                            <a class="font-semibold text-blue-800 underline" href="#">
+                                            <a class="font-semibold text-blue-800 underline" href="{{ route('admin.election_suites.show', ['election_suite' => $election_registration->election_suite_id]) }}">
                                                 {{ $election_registration->election_suite->name }}
                                             </a>                             
                                     </div>                                  

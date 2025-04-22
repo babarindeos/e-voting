@@ -705,6 +705,9 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
     Route::delete('election_suites/{election_suite}/delete', [Admin_ElectionSuiteController::class, 'destroy'])->name('admin.election_suites.delete');
 
 
+    Route::get('election_suites/{election_suite}/registered_voters', [Admin_ElectionSuiteController::class, 'registered_voters'])->name('admin.election_suites.registered_voters');
+
+
     // Elections
     Route::get('elections', [Admin_ElectionController::class, 'index'])->name('admin.elections.index');
     Route::get('elections/create', [Admin_ElectionController::class, 'create'])->name('admin.elections.create');
