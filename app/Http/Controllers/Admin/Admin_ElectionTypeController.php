@@ -115,4 +115,23 @@ class Admin_ElectionTypeController extends Controller
     {
         return view('admin.election_types.confirm_delete', compact('election_type'));
     }
+
+    public function destroy(ElectionType $election_type)
+    {
+        if ($election_type->elections->count())
+        {
+            $data = [
+                'error' => true,
+                'status' => 'fail',
+                'message' => 'The Election Type cannot be deleted as it has elections'
+            ];
+
+            return redirect()->back()->with($data);
+        }
+
+
+        $election_type->delete();
+
+        return redirect()->route('admin.election_types.index');
+    }
 }

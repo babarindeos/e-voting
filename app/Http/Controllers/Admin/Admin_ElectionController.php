@@ -51,10 +51,10 @@ class Admin_ElectionController extends Controller
             'end_time' => 'required'
         ]);
 
-        if ($request->election_type == 2)
+        if ($request->election_type == 2 && $request->college == null)
         {
             return back()->withErrors(['college' => 'The College for the Election is required'])->withInput();
-        }
+        } 
 
         $formFields['college_id'] = $request->college;
         $formFields['election_suite_id'] = $request->input('election_suite');
@@ -134,7 +134,10 @@ class Admin_ElectionController extends Controller
             'end_time' => 'required'
         ]);
 
-        if ($request->election_type == 2)
+        
+        
+
+        if ($request->election_type == 2 && $request->college == null)
         {
             return back()->withErrors(['college' => 'The College for the Election is required'])->withInput();
         }
@@ -197,6 +200,9 @@ class Admin_ElectionController extends Controller
 
     public function destroy(Election $election)
     {
+        $election->delete();
+
+        return redirect()->route('admin.elections.index');
 
     }
 

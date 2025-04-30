@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\ElectionSuite;
+use App\Models\ElectoralCommittee;
 
 use Illuminate\Support\Str;
 
@@ -21,15 +22,19 @@ class Admin_ElectionSuiteController extends Controller
 
     public function create()
     {
-        return view('admin.election_suites.create');
+        $electoral_committees = ElectoralCommittee::orderBy('created_at', 'desc')->get();
+        
+        return view('admin.election_suites.create', compact('electoral_committees'));
     }
 
     public function store(Request $request)
     {
+        
          $formFields = $request->validate([
             'name' => 'required|string|unique:election_suites,name'
          ]);
 
+         $formFields['electoral_committee_id'] = $request->electoral_committee;
          $formFields['description'] = $request->description;
          $formFields['uuid'] = Str::orderedUuid();
 
@@ -75,7 +80,8 @@ class Admin_ElectionSuiteController extends Controller
 
     public function edit(ElectionSuite $election_suite)
     {
-        return view('admin.election_suites.edit', compact('election_suite'));
+        $electoral_committees = ElectoralCommittee::orderBy('created_at', 'desc')->get();
+        return view('admin.election_suites.edit', compact('election_suite', 'electoral_committees'));
     }
 
 
@@ -85,7 +91,9 @@ class Admin_ElectionSuiteController extends Controller
             'name' => 'required'
         ]);
 
-        $formFields['uuid'] = Str::orderedUuid();
+        $formFields['electoral_committee_id'] = $request->electoral_committee;
+
+        //$formFields['uuid'] = Str::orderedUuid();
         $formFields['description'] = $request->description;
 
         try

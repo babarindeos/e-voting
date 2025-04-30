@@ -25,7 +25,7 @@
         <!-- delete Election form //-->
         <section>
                 <div>
-                    <form  action="{{ route('admin.elections.confirm_delete', ['election' => $election->id]) }} " method="POST" class="flex flex-col mx-auto w-[90%] items-center justify-center">
+                    <form  action="{{ route('admin.elections.delete', ['election' => $election->id]) }} " method="POST" class="flex flex-col mx-auto w-[90%] items-center justify-center">
                     @method("delete")    
                     @csrf
 
@@ -36,7 +36,8 @@
                             <h2 class="font-semibold text-xl py-1" >
                                 
                             </h2>
-                            Do you really wish to delete this Election ?
+                            Do you really wish to delete this Election ? <br/>This will delete all candidates, votes and results. 
+                            The process is not reversible.
                             
                             <div class="py-2 text-lg font-semibold">
                                 {{ $election->name }} 

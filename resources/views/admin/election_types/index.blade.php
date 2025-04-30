@@ -59,7 +59,16 @@
 
                                 </td>
                                 <td>
-                                        {{ $election_type->coverage == 1 ? 'University' : 'College' }}
+                                        @if ($election_type->coverage == 1)
+                                            University
+                                            
+                                        @elseif ($election_type->coverage == 2)
+                                        
+                                            College
+                                        @elseif ($election_type->coverage ==3 )
+                                        
+                                            Hall of Residence
+                                        @endif
                                 </td>
                                 <td>
                                            

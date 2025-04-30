@@ -34,10 +34,10 @@
                                 <a href="{{ route('admin.elections.candidates.create',['election'=>$election->id]) }}" class="border border-green-600 text-green-600 py-2 px-6 
                                             rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">Add Candidates</a>
 
-                                <a href="{{ route('admin.elections.candidates.create',['election'=>$election->id]) }}" class="border border-green-600 text-green-600 py-2 px-6 
+                                <a href="{{ route('admin.results.elections.show',['election'=>$election->id]) }}" class="border border-green-600 text-green-600 py-2 px-6 
                                             rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">Results</a>
 
-                                <a href="{{ route('admin.elections.candidates.create',['election'=>$election->id]) }}" class="border border-green-600 text-green-600 py-2 px-6 
+                                <a href="#" class="border border-green-600 text-green-600 py-2 px-6 
                                             rounded-lg text-xs md:text-sm hover:bg-green-500 hover:text-white hover:border-green-500">Analytics</a>
                         </div>
                 </div>
@@ -59,7 +59,7 @@
                                             <th width='20%' class="font-semibold py-2 text-left">Constituency</th> 
                                              
                                                                                                
-                                            <th width='15%' class="font-semibold py-2 text-left">Actions</th> 
+                                            <th width='15%' class="font-semibold py-2 text-center">Actions</th> 
                                                                     
                                         </tr>
                                     </thead>
@@ -72,12 +72,47 @@
                                         <tr class="border border-b border-gray-200 ">
                                             <td class='text-center py-4'>{{ ++$counter }}.</td>
                                             <td>{{ $candidate->position->name }}</td>
-                                            <td>
+                                            <td class='py-4 text-center'>
                                                         @if ($candidate->photo==null)
                                                             <img src="{{ asset('images/avatar_150.jpg')}}" class="w-16 h-16"  />
                                                         @else
                                                             <img src="{{ asset('storage/'.$candidate->photo) }}" class="w-16 h-16 rounded-full" />
                                                         @endif
+
+                                                        @php
+                                                            $yes = 0;
+                                                            $no = 0;
+                                                            $void = 0;
+                                                        
+
+                                                            foreach($candidate->votes as $vote)
+                                                            {
+                                                                if ($vote->yes)
+                                                                {
+                                                                    ++$yes;
+                                                                }
+                                                                elseif ($vote->no)
+                                                                {
+                                                                    ++$no;
+                                                                }
+                                                                elseif ($vote->void)
+                                                                {
+                                                                    ++$void;
+                                                                }
+
+                                                            }
+
+                                                        @endphp
+ 
+                                                        <div class='py-2'>
+                                                            
+                                                            <table  class='border'>
+                                                                <tr class=''>
+                                                                    <td class='py-2 px-2 font-semibold'>Yes</td><td class='px-4 '>  {{ $yes }} </td><td class='font-semibold'>No </td><td class='px-4'> {{ $no }} </td><td>Void</td><td class='px-4'> {{ $void }} </td>
+                                                                </tr>
+                                                                
+                                                            </table>
+                                                        </div>
                                             </td>
                                             <td class="py-8 pr-4">
                                                 

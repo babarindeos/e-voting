@@ -9,7 +9,7 @@ class ElectionSuite extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['uuid', 'name', 'description'];
+    protected $fillable = ['uuid', 'name', 'electoral_committee_id', 'description'];
 
 
     public function elections()

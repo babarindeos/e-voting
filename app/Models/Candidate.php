@@ -32,4 +32,9 @@ class Candidate extends Model
     {
         return $this->belongsTo(Election::class, 'election_id', 'id');
     }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class, 'candidate_id', 'id');
+    }
 }

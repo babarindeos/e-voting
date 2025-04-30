@@ -65,6 +65,41 @@
                         </div><!-- end of Eletoral Committee Position Name //--> 
 
 
+                        
+                        <!-- Electoral Committee //-->
+                        <div class="flex flex-col border-red-900 w-[80%] md:w-[60%] py-2">
+                                
+                                
+                            <select name="electoral_committee" class="border border-1 border-gray-400 bg-gray-50
+                                                                     w-full p-4 rounded-md 
+                                                                     focus:outline-none
+                                                                     focus:border-blue-500 
+                                                                     focus:ring
+                                                                     focus:ring-blue-100"                                                                                                                                                                                                                                                                                                                                                
+                                                                     
+                                                                     style="font-family:'Lato';font-size:16px;font-weight:500;"
+                                                                     
+                                                                     >
+                                                                    <option value=''>-- Select Electoral Committee --</option>
+                                                                        @foreach($electoral_committees as $electoral_committee)
+                                                                            <option class='py-4' value="{{$electoral_committee->id}}" 
+                                                                                    @if ($election_suite->electoral_committee_id == $electoral_committee->id) selected @endif>{{$electoral_committee->name}}</option>
+                                                                        @endforeach                                                                    
+                                                                    </select>
+
+                                                                     @error('electoral_committee')
+                                                                        <span class="text-red-700 text-sm">
+                                                                            {{$message}}
+                                                                        </span>
+                                                                     @enderror
+                            
+                        </div>
+                        
+                        <!-- end of Electoral Committee //-->
+
+
+
+
 
                         <!-- Description //-->
                         <div class="flex flex-col border-red-900 w-[80%] md:w-[60%] py-3">

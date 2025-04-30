@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class VoterRegistration extends Model
 {
+    
     use HasFactory;
+
+    protected $fillable = ['user_id', 'election_suite_id', 'uuid', 'matric_no', 'surname', 'firstname', 'othernames', 'phone', 'college_id', 'department_id', 'level'];
+
+
 
     public function user()
     {

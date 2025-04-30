@@ -100,8 +100,10 @@
 
                                 </td>
                                 <td>
-                                                    
-                                            {{ $voter->department->code }}, {{ $voter->college->code }}
+                                            @if ($voter->department != null || $voter->college != null)        
+                                                {{ $voter->department->code }}, {{ $voter->college->code }}
+                                            @endif
+
                                             <div class='text-sm'>{{ $voter->level }}</div>
 
                                 </td>

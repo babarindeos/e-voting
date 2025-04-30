@@ -163,9 +163,12 @@ class Admin_ElectionRegistrationController extends Controller
     }
 
 
-    public function destroy()
+    public function destroy(ElectionRegistration $election_registration)
     {
-        
+        $election_registration->delete();
+
+        return redirect()->route('admin.election_registrations.index');
+
     }
 
 

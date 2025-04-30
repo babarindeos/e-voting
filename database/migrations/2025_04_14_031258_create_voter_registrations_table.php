@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('voter_registrations', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->unsignedBigInteger('election_suite_id')->unique();
+            $table->unsignedBigInteger('election_suite_id');
             $table->foreign('election_suite_id')->references('id')->on('election_suites')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

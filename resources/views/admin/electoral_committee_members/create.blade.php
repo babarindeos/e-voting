@@ -325,7 +325,7 @@
                                                                     
                                                                     style="font-family:'Lato';font-size:16px;font-weight:500;"                                                                     
                                                                     
-                                                                    >  </textarea>
+                                                                    ></textarea>
                                                                     <div class="text-xs text-gray-600">Max: 2,000 words</div>
                                                                                                                                         
     

@@ -69,6 +69,8 @@ use App\Http\Controllers\Admin\Admin_PositionController;
 use App\Http\Controllers\Admin\Admin_CandidateController;
 use App\Http\Controllers\Admin\Admin_VoterRegistrationController;
 
+use App\Http\Controllers\Admin\Admin_ResultController;
+
 
 
 use App\Http\Controllers\Staff\Staff_AuthController;
@@ -110,8 +112,11 @@ use App\Http\Controllers\VotingCenterController;
 use App\Http\Controllers\Student\Student_VoteController;
 
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\Admin\Admin_HallController;
+use App\Http\Controllers\Admin\Admin_HallResidentController;
+use App\Http\Controllers\Admin\Admin_ResidentUploadController;
 
-
+use App\Http\Controllers\RegistrationCenterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -196,6 +201,9 @@ Route::get('queueMail', [MailTestController::class, 'QueueMailer']);
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 
+Route::get('/election_suites/{election_suite_uuid}/registration_center', [RegistrationCenterController::class, 'index'])->name('guest.registration_center.index');
+Route::post('/election_suites/{election_suite_uuid}/registration_center', [RegistrationCenterController::class, 'login'])->name('guest.registration_center.login');
+Route::get('/election_suite/{election_suite_uuid}/{matric_no}/{email}/registration_center', [RegistrationCenterController::class, 'registration_completed'])->name('guest.registration_center.completed');
 
 
 Route::get('/voting_center', [VotingCenterController::class, 'index'])->name('guest.voting_center.index');
@@ -232,6 +240,8 @@ Route::prefix('student')->middleware(['auth', 'student'])->group(function(){
 
     Route::post('/elections/finalize_voting', [Student_VoteController::class, 'finalize_voting'])->name('student.elections.vote.finalize_voting');
 
+
+    Route::post('/logout', [Student_VoteController::class, 'logout'])->name('student.auth.logout');
     
     
 });
@@ -753,8 +763,45 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
     Route::delete('elections/candidates/{candidate}/delete', [Admin_CandidateController::class, 'destroy'])->name('admin.elections.candidates.delete');
 
 
+
+    // Result
+    Route::get('results/elections', [Admin_ResultController::class, 'index'])->name('admin.results.elections.index');
+    Route::get('results/elections/{election}/show', [Admin_ResultController::class, 'show'])->name('admin.results.elections.show');
+    Route::get('results/elections/{election}/voters/{voter}/show', [Admin_ResultController::class, 'voter_votes'])->name('admin.results.elections.voter_votes');
+    Route::get('results/elections/{election}/candidates/{candidate}/show', [Admin_ResultController::class, 'candidate_votes'])->name('admin.results.elections.candidate_votes');
+
+
+
+    // Halls
+    Route::get('halls', [Admin_HallController::class, 'index'])->name('admin.halls.index');
+    Route::get('halls/create', [Admin_HallController::class, 'create'])->name('admin.halls.create');
+    Route::post('halls/store', [Admin_HallController::class, 'store'])->name('admin.halls.store');
+    Route::get('halls/{hall}/show', [Admin_HallController::class, 'show'])->name('admin.halls.show');
+    Route::get('halls/{hall}/edit', [Admin_HallController::class, 'edit'])->name('admin.halls.edit');
+    Route::post('halls/{hall}/update', [Admin_HallController::class, 'update'])->name('admin.halls.update');
+    Route::get('halls/{hall}/confirm_delete', [Admin_HallController::class, 'confirm_delete'])->name('admin.halls.confirm_delete');
+    Route::delete('halls/{hall}/delete', [Admin_HallController::class, 'destroy'])->name('admin.halls.delete');
+
+
+
+    // Hall Residents
+    Route::get('halls/{hall}/residents', [Admin_HallResidentController::class, 'index'])->name('admin.halls.residents.index');
+    Route::get('halls/{hall}/residents/create', [Admin_HallResidentController::class, 'create'])->name('admin.halls.residents.create');
+    Route::post('halls/{hall}/residents/store', [Admin_HallResidentController::class, 'store'])->name('admin.halls.residents.store');
+    Route::get('halls/residents/{resident}/edit', [Admin_HallResidentController::class, 'edit'])->name('admin.halls.residents.edit');
+    Route::post('halls/residents/{resident}/update', [Admin_HallResidentController::class, 'update'])->name('admin.halls.residents.update');
+    Route::get('halls/residents/{resident}/confirm_delete', [Admin_HallResidentController::class, 'confirm_delete'])->name('admin.halls.residents.confirm_delete');
+    Route::get('halls/{hall}/residents/delete_hall_residents', [Admin_HallResidentController::class, 'delete_hall_residents'])->name('admin.halls.residents.delete_hall_residents');
+    Route::delete('halls/residents/{resident}/delete', [Admin_HallResidentController::class, 'destroy'])->name('admin.halls.residents.delete');
     
 
+
+    // Upload Residents
+    Route::get('residents/halls/{hall}/select_file',  [Admin_ResidentUploadController::class, 'select_file'])->name('admin.halls.residents.uploads.select_file');
+    Route::post('residents/halls/{hall}/select_file',  [Admin_ResidentUploadController::class, 'upload'])->name('admin.halls.residents.uploads.upload');
+    Route::get('residents/halls/{hall}/save_upload',  [Admin_ResidentUploadController::class, 'save_upload'])->name('admin.halls.residents.uploads.save');
+    Route::get('residents/halls/uploads/clear_upload', [Admin_ResidentUploadController::class, 'clear_temp_upload'])->name('admin.halls.residents.uploads.clear_temp_upload');
+    Route::delete('residents/halls/uploads/{upload}/delete', [Admin_ResidentUploadController::class, 'destroy'])->name('admin.halls.residents.uploads.delete');
 
 });
 
@@ -770,4 +817,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+

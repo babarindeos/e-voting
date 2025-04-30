@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('filesize')->nullable();
             $table->string('filetype')->nullable();
             $table->string('slogan')->nullable();
-            $table->string('bio')->nullable();
+            $table->text('bio')->nullable();
             $table->timestamps();
         });
     }

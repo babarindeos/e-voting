@@ -231,5 +231,14 @@ class Admin_ElectoralCommitteeMemberController extends Controller
     }
 
 
+    public function destroy(ElectoralCommitteeMember $member)
+    {
+        $electoral_committee_id = $member->electoral_committee_id;
+       
+        $member->delete();
+        return redirect()->route('admin.electoral_committees.show', ['electoral_committee' => $electoral_committee_id]);
+    }
+
+
 
 }

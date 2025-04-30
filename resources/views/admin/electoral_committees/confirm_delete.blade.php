@@ -27,7 +27,7 @@
         <!-- delete Election form //-->
         <section>
                 <div>
-                    <form  action="{{ route('admin.electoral_committees.confirm_delete', ['electoral_committee' => $electoral_committee->id]) }} " method="POST" class="flex flex-col mx-auto w-[90%] items-center justify-center">
+                    <form  action="{{ route('admin.electoral_committees.delete', ['electoral_committee' => $electoral_committee->id]) }} " method="POST" class="flex flex-col mx-auto w-[90%] items-center justify-center">
                     @method("delete")    
                     @csrf
 

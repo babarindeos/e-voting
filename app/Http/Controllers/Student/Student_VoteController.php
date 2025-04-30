@@ -34,6 +34,19 @@ class Student_VoteController extends Controller
                                 ->select('position_id')
                                 ->distinct()
                                 ->get();
+        
+        
+        if (count($election_positions) == 0)
+        {
+            $data = [
+                'error' => true,
+                'status' => 'fail',
+                'message' => 'There are currently no Candidates for the Election. Contact the Administrator.'
+            ];
+
+            return redirect()->back()->with($data);
+
+        }
 
         
           // get the current registered voter id for the election suite
@@ -389,5 +402,16 @@ class Student_VoteController extends Controller
          
 
          return view('guests.voting_center.voting_completed');
+    }
+
+
+
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+        return redirect()->route('welcome');
     }
 }

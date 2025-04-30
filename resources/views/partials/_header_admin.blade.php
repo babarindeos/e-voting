@@ -68,8 +68,10 @@
                                 </button>
                                 <!-- Sub-menu -->
                                 <div class="absolute hidden group-hover:block bg-white text-gray-800 mt-0 py-2 shadow-lg w-[450%]">
-                                    <a href="{{ route('admin.positions.create') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create Hall</a>
-                                    <a href="{{ route('admin.positions.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Halls</a>
+                                    <a href="{{ route('admin.halls.create') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Create Hall</a>
+                                    <a href="{{ route('admin.halls.index') }}" class="flex flex-row px-4 py-2 border-b hover:bg-green-500 hover:text-white hover:border-l-yellow-500 hover:border-l-4 pr-8">Manage Halls</a>
+                                    
+
                                 </div>
                             </div>
 
@@ -79,7 +81,7 @@
                             <a href="{{ route('admin.dashboard.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-2 ">Live</a>
 
 
-                            <a href="{{ route('admin.dashboard.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-2 ">Results</a>
+                            <a href="{{ route('admin.results.elections.index') }}" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-2 ">Results</a>
                             
                             
                             

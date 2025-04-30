@@ -10,4 +10,10 @@ class Position extends Model
     use HasFactory;
 
     protected $fillable = ['uuid', 'name'];
+
+    public function candidates()
+    {
+        return $this->hasMany(Candidate::class, 'position_id', 'id');
+    }
+
 }

@@ -129,6 +129,22 @@ class Admin_PositionController extends Controller
 
     public function destroy(Position $position)
     {
+        
+        if ($position->candidates->count())
+        {
+             $data = [
+                'error' => true,
+                'status' => 'fail',
+                'message' => 'The Position cannot be deleted as it has candidates'
+            ];
 
+            return redirect()->back()->with($data);
+        }
+
+
+        $position->delete();
+
+        return redirect()->route('admin.positions.index');
+        
     }
 }

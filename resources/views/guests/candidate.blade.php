@@ -55,7 +55,7 @@
                 @if ($candidate->bio != null)
                     <div class='text-2xl mt-2'>About</div>
                     <div class='py-4 text-md'>
-                         {{ $candidate->bio }}
+                         {{!! nl2br($candidate->bio) !!}}
                     </div>
 
                 @endif

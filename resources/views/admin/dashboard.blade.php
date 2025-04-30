@@ -21,7 +21,7 @@
                     <div class="flex flex-col border border-1 border-yellow-500 
                                 w-full md:w-[20%] px-4 py-4 mt-1 rounded-md bg-yellow-500">
                         <div class="text-white text-3xl text-end">
-                            {{ number_format($meeting_count)}}
+                            {{ number_format($election_suite_count)}}
                         </div>
                         <div class="text-sm text-white font-normal text-end">
                             Election Suites
@@ -31,7 +31,7 @@
                     <div class="flex flex-col border border-1 border-pink-500 
                                 w-full md:w-[20%] px-4 py-4 mt-1 rounded-md bg-pink-500">
                         <div class="text-white text-3xl text-end">
-                            {{ $paper_count}}
+                            {{ $election_count}}
                         </div>
                         <div class="text-sm text-white font-normal text-end">
                             Elections
@@ -42,7 +42,7 @@
                     <div class="flex flex-col border border-1 border-green-500 
                                 w-full md:w-[20%] px-4 py-4 mt-1 rounded-md bg-green-500">
                         <div class="text-white text-3xl text-end">
-                            {{ $digest_count}}
+                            {{ $position_count}}
                         </div>
                         <div class="text-sm text-white font-normal text-end">
                             Positions
@@ -53,7 +53,7 @@
                     <div class="flex flex-col border border-1 border-blue-500 
                                 w-full md:w-[20%] px-4 py-4 mt-1 rounded-md bg-blue-500">
                         <div class="text-white text-3xl  text-end">
-                            {{ $staff_count}}
+                            {{ $candidate_count}}
                         </div>
                         <div class="text-sm text-white  text-end">
                             Candidates
@@ -63,7 +63,7 @@
                     <div class="flex flex-col border border-1 border-purple-500 
                                 w-full md:w-[20%] px-4 py-4 mt-1 rounded-md bg-purple-500">
                         <div class="text-white text-3xl text-end">
-                            {{ $department_count}}
+                            {{ $committee_count}}
                         </div>
                         <div class="text-sm text-white text-end">
                             Committees
@@ -85,13 +85,13 @@
                 <div class='py-2 border-b w-full font-bold text-xl'>Election Suites</div>
 
                 <div class='py-1'>
-                        @foreach($announcements as $announcement)
+                        @foreach($election_suites as $election_suite)
                             <div class='py-4'>
-                                    <a class='underline' href="{{ route('admin.announcements.show',['announcement'=>$announcement->id]) }}">
-                                        {{ $announcement->subject }}
+                                    <a class='underline' href="#">
+                                        {{ $election_suite->name }}
                                     </a>
                                     <div class='text-xs'>
-                                        {{ $announcement->created_at->format('l jS F, Y g:i a') }}
+                                        {{ $election_suite->created_at->format('l jS F, Y g:i a') }}
                                     </div>
                             </div>
                         @endforeach
@@ -102,13 +102,13 @@
                     <div class='py-2 border-b w-full font-bold text-xl'>Elections</div>
 
                     <div class='py-1'>
-                            @foreach($meetings as $meeting)
+                            @foreach($elections as $election)
                                 <div class='py-4'>
-                                        <a class='underline' href="{{ route('admin.meetings.show',['meeting'=>$meeting->id]) }}">
-                                            {{ $meeting->title }}
+                                        <a class='underline' href="#">
+                                            {{ $election->name }}
                                         </a>
                                         <div class='text-xs'>
-                                            {{ $meeting->created_at->format('l jS F, Y g:i a') }}
+                                            {{ $election->created_at->format('l jS F, Y g:i a') }}
                                         </div>
                                 </div>
                             @endforeach
@@ -130,13 +130,13 @@
                 <div class='py-2 border-b w-full font-bold text-xl'>Positions</div>
 
                 <div class='py-1'>
-                        @foreach($papers as $paper)
+                        @foreach($positions as $position)
                             <div class='py-4'>
-                                    <a class='underline' href="{{ route('admin.papers.show',['paper'=>$paper->id]) }}">
-                                        {{ $paper->title }}
+                                    <a class='underline' href="#">
+                                        {{ $position->name }}
                                     </a>
                                     <div class='text-xs'>
-                                        {{ $paper->created_at->format('l jS F, Y g:i a') }}
+                                        {{ $position->created_at->format('l jS F, Y g:i a') }}
                                     </div>
                             </div>
                         @endforeach
@@ -147,13 +147,13 @@
                     <div class='py-2 border-b w-full font-bold text-xl'>Candidates</div>
 
                     <div class='py-1'>
-                            @foreach($minutes as $minute)
+                            @foreach($candidates as $candidate)
                                 <div class='py-4'>
-                                        <a class='underline' href="{{ asset('storage/'.$minute->file) }}" target="_blank">
-                                            {{ $minute->title }}
+                                        <a class='underline' href="#" target="_blank">
+                                            {{ $candidate->surname }}  {{ $candidate->firstname }}
                                         </a>
                                         <div class='text-xs'>
-                                            {{ $minute->created_at->format('l jS F, Y g:i a') }}
+                                            {{ $candidate->created_at->format('l jS F, Y g:i a') }}
                                         </div>
                                 </div>
                             @endforeach

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Http;
+
 class VotingCenterController extends Controller
 {
     //
@@ -21,11 +23,10 @@ class VotingCenterController extends Controller
             'password' => 'required|string'
         ]);
 
-        $matric_no = $request->matric_no;
-        $email = $matric_no.'@funiec.com';
-        $password = $request->password;
 
-        if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => 'student']))
+        
+
+        if (Auth::attempt(['matric_no' => $request->matric_no, 'password' => $request->password, 'role' => 'student']))
         {
             $request->session()->regenerate();
 

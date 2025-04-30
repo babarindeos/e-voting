@@ -44,7 +44,9 @@
                                                                     </div>
 
                                                                     <div class='text-2xl'>
-                                                                            Register Now
+                                                                        <a class='underline' href="{{ route('guest.registration_center.index',['election_suite_uuid'=> $registration->election_suite->uuid]) }}">    
+                                                                                Register Now
+                                                                        </a>
                                                                     </div>
                                                             </div>
                                                     </div>
@@ -106,11 +108,13 @@
                                                                                         @if ($candidate->position_id == $election_position->id)
                                                                                                 <div class='flex flex-col items-center space-y-2'>
                                                                                                         <div> 
-                                                                                                                @if ($candidate->photo==null)
-                                                                                                                    <img src="{{ asset('images/avatar_150.jpg')}}" class="w-36 h-36"  />
-                                                                                                                @else
-                                                                                                                    <img src="{{ asset('storage/'.$candidate->photo) }}" class="w-36 h-36 rounded-full" />
-                                                                                                                @endif
+                                                                                                                <a class='hover:shadow-md' href="{{ route('guest.candidate.alias',['candidate_alias' => $candidate->alias]) }}">
+                                                                                                                        @if ($candidate->photo==null)
+                                                                                                                        <img src="{{ asset('images/avatar_150.jpg')}}" class="w-36 h-36"  />
+                                                                                                                        @else
+                                                                                                                        <img src="{{ asset('storage/'.$candidate->photo) }}" class="w-36 h-36 rounded-full hover:shadow-lg" />
+                                                                                                                        @endif
+                                                                                                                </a>
                                                                                                         </div>
                                                                                                         <div>
                                                                                                                 <a class='hover:underline' href="{{ route('guest.candidate.alias',['candidate_alias' => $candidate->alias]) }}">
@@ -142,10 +146,10 @@
                 <div class="flex flex-col md:flex-row h-[80%]">
                             <!-- panel //-->
                             <div class="flex flex-col border-0 py-16 h-full w-full  md:w-[100%] md:h-[100%]"
-                                style="background-image:url('{{asset('images/frontimage.jpg')}}'); 
+                                style="background-image:url('{{asset('images/online-elections-voting.jpeg')}}'); 
                                     background-size: cover; 
                                     background-repeat: repeat
-                                    background-position: center left; background-color:#f1f1f1;"
+                                    background-position: center center; background-color:#f1f1f1;"
                             >
                                     <!-- <img src="{{ asset('images/goviflow_low.jpg') }}" /> //-->
                             </div>

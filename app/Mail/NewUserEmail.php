@@ -37,7 +37,7 @@ class NewUserEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Welcome to FUNAAB e-Senate',
+            subject: 'My Voter Registration for FUNAABSU Elections',
             bcc: 'babarindeos@funaab.edu.ng'
         );
     }

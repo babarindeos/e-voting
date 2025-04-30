@@ -125,4 +125,12 @@ class Admin_ElectoralCommitteeController extends Controller
     {
         return view('admin.electoral_committees.show', compact('electoral_committee'));
     }
+
+    public function destroy(ElectoralCommittee $electoral_committee)
+    {
+        $electoral_committee->delete();
+
+        return redirect()->route('admin.electoral_committees.index');
+
+    }
 }

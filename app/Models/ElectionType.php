@@ -10,4 +10,9 @@ class ElectionType extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'coverage'];
+
+    public function elections()
+    {
+        return $this->hasMany(Election::class, 'election_type_id', 'id');
+    }
 }

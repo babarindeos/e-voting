@@ -15,32 +15,39 @@ use App\Models\Meeting;
 use Illuminate\Support\Facades\DB;
 use App\Models\Announcement;
 use App\Models\Minute;
+use App\Models\ElectionSuite;
+use App\Models\Election;
+use App\Models\Position;
+use App\Models\Candidate;
+use App\Models\ElectoralCommittee;
 
 class Admin_DashboardController extends Controller
 {
     //
     public function index(){
 
-        $meeting_count = Meeting::count();
-        $staff_count = Staff::count();
-        $digest_count = Digest::count();
-        $paper_count = Paper::count();
-        $department_count = Department::count();
+        $election_suite_count = ElectionSuite::count();
+        $election_count = Election::count();
+        $position_count = Position::count();
+        $candidate_count = Candidate::count();
+        $committee_count = ElectoralCommittee::count();
 
-        $announcements = Announcement::orderBy('created_at', 'desc')->take(1)->get();
+        $election_suites = ElectionSuite::orderBy('created_at', 'desc')->take(1)->get();
 
-        $meetings = Meeting::orderBy('created_at', 'desc')->take(1)->get();
+        $elections = Election::orderBy('created_at', 'desc')->take(1)->get();
 
-        $papers = Paper::orderBy('created_at', 'desc')->take(3)->get();
+        $positions = Position::orderBy('created_at', 'desc')->take(3)->get();
 
-        $minutes = Minute::orderBy('created_at', 'desc')->take(3)->get();
+        $candidates = Candidate::orderBy('created_at', 'desc')->take(3)->get();
 
-        return view('admin.dashboard', compact('announcements', 'meetings', 'papers', 'minutes'))->with([
-            "meeting_count" => $meeting_count,
-            "digest_count" => $digest_count,
-            "staff_count" => $staff_count,
-            "paper_count" => $paper_count,
-            "department_count" => $department_count,
+        $committees = ElectoralCommittee::orderBy('created_at', 'desc')->take(3)->get();
+
+        return view('admin.dashboard', compact('election_suites', 'elections', 'positions', 'candidates', 'committees'))->with([
+            "election_suite_count" => $election_suite_count,
+            "election_count" => $election_count,
+            "position_count" => $position_count,
+            "candidate_count" => $candidate_count,
+            "committee_count" => $committee_count,
         ]);
 
     }

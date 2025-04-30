@@ -3,23 +3,20 @@
         <img src="{{ asset('images/logo.png')}}" alt="FUNAAB Logo" width="200" height="auto" />
     @endslot
 
-# Welcome to FUNAAB e-Senate
+# Voter Registration for FUNAABSU Elections
 Federal University of Agriculture Abeokuta
 
 Dear {{ $fullname }},
 
-A Staff account has been created for you to facilitate your official work activities from 
-anywhere at anytime. 
+Congratulations for completing the Voter Registration process. 
 
-Please find below your access credentials:
+Please find below your registration code for the elections:
 
-**Username:** {{ $username }}
 
-**Password:** {{ $password }}
 
-<x-mail::button :url="'https://www.e-senate.unaab.edu.ng/'">
- Go to e-Senate
-</x-mail::button>
+**Registration code:** {{ $password }}
+
+
 
 Thanks,<br>
 {{ config('app.name') }}

@@ -54,7 +54,7 @@
                                     focus:outline-none
                                     focus:border-blue-500 
                                     focus:ring
-                                    focus:ring-blue-100" placeholder="Password"
+                                    focus:ring-blue-100" placeholder="Registration Code"
                                     
                                     value="{{ old('password') }}"
                                     

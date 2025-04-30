@@ -10,4 +10,11 @@ class ElectoralCommitteePosition extends Model
     use HasFactory;
 
     protected $fillable = ['uuid', 'position'];
+
+    public function members()
+    {
+        return $this->hasMany(ElectoralCommitteeMember::class, 'position_id', 'id');
+
+        
+    }
 }

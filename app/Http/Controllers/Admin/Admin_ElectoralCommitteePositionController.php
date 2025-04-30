@@ -126,7 +126,20 @@ class Admin_ElectoralCommitteePositionController extends Controller
 
     public function destroy(Request $request, ElectoralCommitteePosition $position)
     {
+        if ($position->members->count())
+        {
+            $data = [
+                'error' => true,
+                'status' => 'fail',
+                'message' => 'The Electoral Committe Position cannot be deleted as it has members'
+            ];
 
+            return redirect()->back()->with($data);
+        }
+
+        $position->delete();
+
+        return redirect()->route('admin.electoral_committees.positions.index');
     }
 
 }

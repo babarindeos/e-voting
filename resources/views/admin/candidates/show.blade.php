@@ -50,9 +50,9 @@
                    
                 <div class='flex flex-col md:flex-row w-full border-0'>
                     <div class="w-full md:w-[30%] border-0">
-                                <div>
+                                <div class='flex flex-col items-center mx-auto border-0'>
                                         @if ($candidate->photo==null)
-                                            <img src="{{ asset('images/avatar_150.jpg')}}" class="w-64 h-64"  />
+                                            <img src="{{ asset('images/avatar_150.jpg')}}" class="w-82 h-82"  />
                                         @else
                                             <img src="{{ asset('storage/'.$candidate->photo) }}" class="w-82 h-82 rounded-lg" />
                                         @endif

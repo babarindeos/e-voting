@@ -40,7 +40,7 @@
                             
                             <div class="relative group flex">
                                 
-                                    <form action="{{ route('staff.auth.logout') }}" method="POST" class="flex flex-row w-full border-0 border-blue-900">
+                                    <form action="{{ route('student.auth.logout') }}" method="POST" class="flex flex-row w-full border-0 border-blue-900">
                                         @csrf
                                         <button type="submit" class="flex font-semibold items-center text-white hover:border-b-yellow-100 hover:border-b-4 mx-2">Log Out</button>
                                     </form>

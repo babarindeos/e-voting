@@ -38,4 +38,15 @@ class Election extends Model
     {
         return $this->hasManyThrough(Position::class, Candidate::class, 'election_id', 'id', 'id', 'position_id');
     }
+
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class, 'election_id', 'id');
+    }
+
+    public function finalized_votes()
+    {
+        return $this->hasMany(FinalizedVote::class, 'election_id', 'id');
+    }
 }
